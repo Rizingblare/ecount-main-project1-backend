@@ -1,0 +1,6 @@
+C:\ws\cSharpWorkspace\Command\Command\bin\Debug\Command.dll
+C:\ws\cSharpWorkspace\Command\Command\bin\Debug\Command.pdb
+C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.csproj.AssemblyReference.cache
+C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.csproj.CoreCompileInputs.cache
+C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.dll
+C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.pdb
