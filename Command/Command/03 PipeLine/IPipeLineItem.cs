@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Command._03_PipeLine
+namespace Command
 {
-    internal interface IPipeLineItem
+    public interface IPipeLineItem : ICommand<>
     {
     }
 }

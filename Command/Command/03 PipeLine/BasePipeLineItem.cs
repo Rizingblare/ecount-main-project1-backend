@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Command._03_PipeLine
+namespace Command
 {
-    internal class BasePipeLineItem
+    public abstract class BasePipeLineItem : IPipeLineItem<>
     {
     }
 }

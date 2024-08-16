@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="03 PipeLine\BasePipeLine.cs" />
+    <Compile Include="03 PipeLine\BasePipeLineItem.cs" />
+    <Compile Include="03 PipeLine\IPipeLineItem.cs" />
     <Compile Include="04 BizDomain\CRUD\CreateCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\DeleteCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\FindByIdCommand.cs" />
@@ -60,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="02 Extension\" />
-    <Folder Include="03 unname\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

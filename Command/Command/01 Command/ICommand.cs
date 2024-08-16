@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Command
 {
     public interface ICommand <TInput, TOutput>
-        where TInput : BaseRequest
-        where TOutput : BaseResponse
+    where TInput : BaseRequest
+    where TOutput : BaseResponse
     {
         void Execute(TInput input, TOutput output);
     }
