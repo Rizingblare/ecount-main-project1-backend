@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="03 PipeLine\BasePipeLine.cs" />
-    <Compile Include="03 PipeLine\BasePipeLineItem.cs" />
+    <Compile Include="01 Command\IExecutable.cs" />
+    <Compile Include="03 PipeLine\PipeLine.cs" />
+    <Compile Include="03 PipeLine\PipeLineItem.cs" />
     <Compile Include="03 PipeLine\IPipeLineItem.cs" />
     <Compile Include="04 BizDomain\CRUD\CreateCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\DeleteCommand.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="04 BizDomain\CRUD\Prod\CreateProdCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\Prod\FindByIdProdCommand.cs" />
     <Compile Include="04 BizDomain\Request\BaseRequest.cs" />
+    <Compile Include="04 BizDomain\Request\BaseRequestDTO.cs" />
     <Compile Include="04 BizDomain\Request\RequestTestDTO.cs" />
     <Compile Include="04 BizDomain\Response\BaseResponse.cs" />
     <Compile Include="04 BizDomain\CRUD\Sale\FindAllSaleCommand.cs" />

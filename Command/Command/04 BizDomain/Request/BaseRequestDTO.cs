@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public abstract class BasePipeLineItem : IPipeLineItem<>
+    public class BaseRequestDTO
     {
     }
 }

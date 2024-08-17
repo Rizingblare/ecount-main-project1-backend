@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class CreateProdCommand<TInput, TOutput> : CreateCommand<TInput, TOutput>
-        where TInput : BaseRequest
-        where TOutput : BaseResponse
+    public class CreateProdCommand<TRequest, TResult> : CreateCommand<TRequest, TResult>
+        where TRequest : BaseRequest
+        where TResult : BaseResponse
     {
         public override void Init()
         {
@@ -17,7 +17,7 @@ namespace Command
         }
         //public override bool CanExecute() { return true; }
         //public override void OnExecuting() { }
-        public override void ExecuteCore(TInput input, TOutput output)
+        public override void ExecuteCore()
         {
             Console.WriteLine($"{input.Body}를 가지고 막 생성하려고 이리저리 로직을 타고 도는 중~~");
         }

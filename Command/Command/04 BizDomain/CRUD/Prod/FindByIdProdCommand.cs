@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class FindByIdProdCommand<TInput, TOutput> : FindByIdCommand<TInput, TOutput>
-        where TInput : BaseRequest
-        where TOutput : BaseResponse
+    public class FindByIdProdCommand<TRequest, TResult> : FindByIdCommand<TRequest, TResult>
+        where TRequest : BaseRequest
+        where TResult : BaseResponse
     {
         //public override void Init() { }
         //public override bool CanExecute() { return true; }
         //public override void OnExecuting() { }
-        public override void ExecuteCore(TInput input, TOutput output) { }
+        public override void ExecuteCore() { }
         //public override void Executed() { }
     }
 }

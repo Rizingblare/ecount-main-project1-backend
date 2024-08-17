@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public interface ICommand <TInput, TOutput>
-    where TInput : BaseRequest
-    where TOutput : BaseResponse
-    {
-        void Execute(TInput input, TOutput output);
-    }
+    public interface ICommand <TRequest, TResult> : IExecutable
+    where TRequest : BaseRequest
+    where TResult : BaseResponse
+    { }
 }

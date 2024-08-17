@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public abstract class BaseCommand<TInput, TOutput> : ICommand<TInput, TOutput>
-    where TInput : BaseRequest
-    where TOutput : BaseResponse
+    public abstract class BaseCommand<TRequest, TResult> : BaseRequest, ICommand<TRequest, TResult>
+    where TRequest : BaseRequest
+    where TResult : BaseResponse
     {
-        public void Execute(TInput input, TOutput output)
+        public void Execute()
         {
             Init();
             if (!CanExecute()) return;
             OnExecuting();
-            ExecuteCore(input, output);
+            ExecuteCore();
             Executed();
         }
 
         public virtual void Init() { }
         public virtual bool CanExecute() { return true; }
         public virtual void OnExecuting() { }
-        public abstract void ExecuteCore(TInput input, TOutput output);
+        public abstract void ExecuteCore();
         public virtual void Executed() { }
 
     }

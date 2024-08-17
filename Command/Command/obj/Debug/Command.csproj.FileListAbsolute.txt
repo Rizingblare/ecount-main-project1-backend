@@ -4,3 +4,7 @@ C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.csproj.AssemblyReference
 C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.csproj.CoreCompileInputs.cache
 C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.dll
 C:\ws\cSharpWorkspace\Command\Command\obj\Debug\Command.pdb
+C:\ws\cSharpWorkspace\ecount-main-project1-backend\Command\Command\obj\Debug\Command.csproj.AssemblyReference.cache
+C:\ws\cSharpWorkspace\ecount-main-project1-backend\Command\Command\obj\Debug\Command.csproj.CoreCompileInputs.cache
+C:\ws\cSharpWorkspace\ecount-main-project1-backend\Command\Command\obj\Debug\Command.dll
+C:\ws\cSharpWorkspace\ecount-main-project1-backend\Command\Command\obj\Debug\Command.pdb

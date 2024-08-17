@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public abstract class FindByIdCommand<TInput, TOutput> : BaseCommand<TInput, TOutput>
-        where TInput : BaseRequest
-        where TOutput : BaseResponse
+    public abstract class FindByIdCommand<TRequest, TResult> : BaseCommand<TRequest, TResult>
+        where TRequest : BaseRequest
+        where TResult : BaseResponse
     {
         // public override void Init() { }
         // public override bool CanExecute() { return true; }
