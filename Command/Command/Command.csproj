@@ -53,14 +53,12 @@
     <Compile Include="01 Command\ICommand.cs" />
     <Compile Include="04 BizDomain\CRUD\Prod\CreateProdCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\Prod\FindByIdProdCommand.cs" />
-    <Compile Include="04 BizDomain\Request\BaseRequest.cs" />
-    <Compile Include="04 BizDomain\Request\BaseRequestDTO.cs" />
-    <Compile Include="04 BizDomain\Request\RequestTestDTO.cs" />
-    <Compile Include="04 BizDomain\Response\BaseResponse.cs" />
+    <Compile Include="04 BizDomain\Request\CommandRequest.cs" />
+    <Compile Include="04 BizDomain\Request\CreateCommandRequest.cs" />
+    <Compile Include="04 BizDomain\Result\CommandResult.cs" />
     <Compile Include="04 BizDomain\CRUD\Sale\FindAllSaleCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\Sale\UpdateSaleCommand.cs" />
     <Compile Include="01 Command\BaseCommand.cs" />
-    <Compile Include="04 BizDomain\Response\ResponseTestDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

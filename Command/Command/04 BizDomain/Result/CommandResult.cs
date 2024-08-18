@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Command
 {
-    public abstract class BaseRequest
-    {
-        private readonly string _header;
-        public string Header { get; }
-
-        private readonly string _body;
+    public class CommandResult {
+        public string Success { get; }
         public string Body { get; }
+        public string Error { get; }
+
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Command
 {
     public class FindAllSaleCommand<TRequest, TResult> : FindAllCommand<TRequest, TResult>
-        where TRequest : BaseRequest
-        where TResult : BaseResponse
+        where TRequest : CommandRequest
+        where TResult : CommandResult
     {
         //public override void Init() { }
         //public override bool CanExecute() { return true; }

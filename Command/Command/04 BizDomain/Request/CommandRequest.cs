@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class BaseRequestDTO
+    public abstract class CommandRequest
     {
+        public string Header { get; set; }
+        public string Body { get; set; }
     }
 }

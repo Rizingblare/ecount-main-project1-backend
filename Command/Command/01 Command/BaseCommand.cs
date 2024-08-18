@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public abstract class BaseCommand<TRequest, TResult> : BaseRequest, ICommand<TRequest, TResult>
-    where TRequest : BaseRequest
-    where TResult : BaseResponse
+    public abstract class BaseCommand<TRequest, TResult> : ICommand<TRequest, TResult>
+        where TRequest : CommandRequest
+        where TResult : CommandResult
     {
+        public TRequest Req { get; set; }
+        public TResult Res { get; set; }
+
         public void Execute()
         {
             Init();
