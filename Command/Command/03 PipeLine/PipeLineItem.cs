@@ -10,6 +10,8 @@ namespace Command
         where TCommand : IExecutable
         where TResult : CommandResult, new()
     {
+        private List<BaseError> _errors = new List<BaseError>();
+        public List<BaseError> Errors { get { return _errors; } }
         private TCommand _command;
         private Predicate<TCommand> _filter;
         private Action<TCommand> _mapper;
@@ -37,6 +39,10 @@ namespace Command
                 _mapper(_command);
             }
             _command?.Execute();
+            if (_command is BaseCommand<CommandRequest, TResult> command)
+            {
+                command.Res = _result;
+            }
             _executed?.Invoke(_result);
 
         }
