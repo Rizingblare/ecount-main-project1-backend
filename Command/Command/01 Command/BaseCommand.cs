@@ -10,6 +10,8 @@ namespace Command
         where TRequest : CommandRequest
         where TResult : CommandResult
     {
+        private List<BaseError> _errors = new List<BaseError>();
+        public List<BaseError> Errors { get { return _errors; } }
         public TRequest Req { get; set; }
         public TResult Res { get; set; }
 

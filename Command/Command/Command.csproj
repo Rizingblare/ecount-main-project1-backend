@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="01 Command\IExecutable.cs" />
+    <Compile Include="02 Extension\Extension.cs" />
     <Compile Include="03 PipeLine\PipeLine.cs" />
     <Compile Include="03 PipeLine\PipeLineItem.cs" />
     <Compile Include="03 PipeLine\IPipeLineItem.cs" />
@@ -59,10 +60,10 @@
     <Compile Include="04 BizDomain\CRUD\Sale\FindAllSaleCommand.cs" />
     <Compile Include="04 BizDomain\CRUD\Sale\UpdateSaleCommand.cs" />
     <Compile Include="01 Command\BaseCommand.cs" />
+    <Compile Include="05 Error\BaseError.cs" />
+    <Compile Include="05 Error\CreateTestError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="02 Extension\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
