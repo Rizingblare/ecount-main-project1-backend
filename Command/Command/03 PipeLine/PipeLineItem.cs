@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.CSharp.RuntimeBinder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +10,7 @@ namespace Command
 {
     public class PipeLineItem<TCommand, TResult> : IPipeLineItem
         where TCommand : IExecutable
-        where TResult : CommandResult, new()
+        where TResult : BaseResponse, new()
     {
         private List<BaseError> _errors = new List<BaseError>();
         public List<BaseError> Errors { get { return _errors; } }
@@ -38,13 +40,17 @@ namespace Command
             {
                 _mapper(_command);
             }
-            _command?.Execute();
-            if (_command is BaseCommand<CommandRequest, TResult> command)
+            _command.Execute();
+
+            dynamic dCommand = _command;
+            try {
+                _result = dCommand.Result;
+            }
+            catch (RuntimeBinderException ex)
             {
-                command.Res = _result;
+                Console.WriteLine("올바른 커맨드 타입이 아닙니다: " + ex.Message);
             }
             _executed?.Invoke(_result);
-
         }
 
         public PipeLineItem<TCommand, TResult> AddFilter(Predicate<TCommand> filter)

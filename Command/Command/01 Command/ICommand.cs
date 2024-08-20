@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace Command
 {
     public interface ICommand <TRequest, TResult> : IExecutable
-        where TRequest : CommandRequest
-        where TResult : CommandResult
-    { }
+        where TRequest : BaseRequest
+        where TResult : BaseResponse
+    {
+        TRequest Request { get; set; }
+        TResult Result { get; set; }
+    }
 }

@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 namespace Command
 {
     public abstract class BaseCommand<TRequest, TResult> : ICommand<TRequest, TResult>
-        where TRequest : CommandRequest
-        where TResult : CommandResult
+        where TRequest : BaseRequest
+        where TResult : BaseResponse, new()
     {
+        public TRequest Request { get; set; }
+        public TResult Result { get; set; }
         private List<BaseError> _errors = new List<BaseError>();
         public List<BaseError> Errors { get { return _errors; } }
-        public TRequest Req { get; set; }
-        public TResult Res { get; set; }
+
+        public BaseCommand()
+        {
+            Result = new TResult();
+        }
 
         public void Execute()
         {

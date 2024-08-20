@@ -21,7 +21,7 @@ namespace Command
 
         public PipeLineItem<TCommand, TResult> Register<TCommand, TResult>(TCommand command)
             where TCommand : IExecutable
-            where TResult : CommandResult, new()
+            where TResult : BaseResponse, new()
         {
             var item = new PipeLineItem<TCommand, TResult>(command);
             items.Enqueue(item);
