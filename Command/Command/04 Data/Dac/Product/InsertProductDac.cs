@@ -9,7 +9,7 @@ namespace Command
 {
     public class InsertProductDac : BaseCommand<BaseRequest, CommandResultWithBody<int>>
     {
-        public Product product { get; set; }
+        public Product Entity { get; set; }
 
         public override void ExecuteCore()
         {
@@ -20,11 +20,11 @@ namespace Command
 
             var parameters = new Dictionary<string, object>()
             {
-                { "@com_code", product.Key.COM_CODE },
-                { "@prod_cd", product.Key.PROD_CD },
-                { "@prod_nm", product.PROD_NM },
-                { "@price", product.PRICE },
-                { "@write_dt", product.WRITE_DT }
+                { "@com_code", Entity.Key.COM_CODE },
+                { "@prod_cd", Entity.Key.PROD_CD },
+                { "@prod_nm", Entity.PROD_NM },
+                { "@price", Entity.PRICE },
+                { "@write_dt", Entity.WRITE_DT }
             };
 
             var dbManager = new DbManager();

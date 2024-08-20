@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -113,6 +113,11 @@
     <Compile Include="06 BizDomain\Request\CommandRequest.cs" />
     <Compile Include="06 BizDomain\Result\CommandResultWithBody.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="04 Data\Dac\Product\UpdateProductDac.cs" />
+    <Compile Include="04 Data\Dac\Product\DeleteProductDac.cs" />
+    <Compile Include="04 Data\Dac\Sale\UpdateSaleDac.cs" />
+    <Compile Include="04 Data\Dac\Sale\SelectSaleDac.cs" />
+    <Compile Include="04 Data\Dac\Sale\DeleteSaleDac.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
