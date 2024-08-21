@@ -11,18 +11,14 @@ namespace Command
     {
         public override void ExecuteCore()
         {
-            var sql = @"
+            var parameters = new Dictionary<string, object>();
+            var optionalSortString = MakeOptionalSortString(this.Request);
+
+            var sql = $@"
                 SELECT com_code, io_date, io_no, prod_cd, qty, remarks
                 FROM flow.sale_kjd
-                WHERE com_code = @com_code AND io_date = @io_date AND io_no = @io_no
+                ORDER BY {optionalSortString}io_date, io_no DESC
             ";
-
-            var parameters = new Dictionary<string, object>()
-            {
-                {"@com_code", this.Request.ComCode},
-                {"@io_date", this.Request.IoDate},
-                {"@io_no", this.Request.IoNo}
-            };
 
             var dbManager = new DbManager();
             this.Result.Body = dbManager.Query<Sale>(sql, parameters, (reader, data) =>
@@ -36,11 +32,25 @@ namespace Command
             });
         }
 
+        private string MakeOptionalSortString(SelectSaleDacRequestDto request)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (request.isOptionalProdCdAes)
+            {
+                sb.Append("prod_cd, ");
+            }
+
+            if (request.isOptionalQtyDesc)
+            {
+                sb.Append("qty, ");
+            }
+            return sb.ToString();
+        }
+
         public class SelectSaleDacRequestDto : BaseRequest
         {
-            public string ComCode { get; set; }
-            public string IoDate { get; set; }
-            public int IoNo { get; set; }
+            public bool isOptionalProdCdAes { get; set; }
+            public bool isOptionalQtyDesc { get; set; }
         }
     }
 }

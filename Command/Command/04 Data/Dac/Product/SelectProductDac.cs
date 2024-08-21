@@ -16,6 +16,7 @@ namespace Command
                 SELECT *
                 FROM flow.product_kjd
                 WHERE com_code = @com_code and prod_cd = @prod_cd
+                ORDER BY write_dt
             ";
 
             var parameters = new Dictionary<string, object>()
@@ -33,6 +34,7 @@ namespace Command
                 data.PROD_NM = reader["prod_nm"].ToString();
                 data.WRITE_DT = (DateTime)reader["write_dt"];
             });
+            
 
         }
 

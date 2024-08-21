@@ -12,7 +12,7 @@ namespace Command
     {
         private const string ECOUNT_TEST_CONNECTION = "host=10.10.10.108;port=45111;username=ecount_user;password=1q2w3e4r;database=ecount";
         private const string LOCAL_TEST_CONNECTION = "host=127.0.0.1;port=5432;username=postgres;password=postgres;database=postgres";
-        private const string _connectionString = LOCAL_TEST_CONNECTION;
+        private const string _connectionString = ECOUNT_TEST_CONNECTION;
 
         public DbManager()
         {
