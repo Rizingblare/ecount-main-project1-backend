@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class InsertProductDac : BaseCommand<BaseRequest, CommandResultWithBody<int>>
+    public class InsertProductDac : BaseCommand<CommandResultWithBody<int>>
     {
         public Product Entity { get; set; }
 

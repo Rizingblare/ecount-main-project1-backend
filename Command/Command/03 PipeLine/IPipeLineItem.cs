@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public interface IPipeLineItem : IExecutable
+    public interface IPipeLineItem : ICommand
     { }
 }

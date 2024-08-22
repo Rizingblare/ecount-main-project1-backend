@@ -8,7 +8,7 @@ using static Command.DeleteProductDac;
 
 namespace Command
 {
-    public class DeleteProductDac : BaseCommand<DeleteProductDacRequestDto, CommandResultWithBody<int>>
+    public class DeleteProductDac : BaseCommand<CommandResultWithBody<int>>
     {
         public override void ExecuteCore()
         {

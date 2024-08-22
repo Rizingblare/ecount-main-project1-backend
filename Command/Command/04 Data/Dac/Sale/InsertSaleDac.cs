@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class InsertSaleDac : BaseCommand<BaseRequest, CommandResultWithBody<int>>
+    public class InsertSaleDac : BaseCommand<CommandResultWithBody<int>>
     {
         public Sale sale { get; set; }
 

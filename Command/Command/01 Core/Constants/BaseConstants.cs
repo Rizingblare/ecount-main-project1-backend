@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public interface IExecutable
+    public class BaseConstants
     {
-        List<BaseError> Errors { get; }
-        void Execute();
     }
 }

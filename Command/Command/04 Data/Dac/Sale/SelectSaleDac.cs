@@ -7,7 +7,7 @@ using static Command.SelectSaleDac;
 
 namespace Command
 {
-    public class SelectSaleDac : BaseCommand<SelectSaleDacRequestDto, CommandResultWithBody<List<Sale>>>
+    public class SelectSaleDac : BaseCommand<CommandResultWithBody<List<Sale>>>
     {
         public override void ExecuteCore()
         {

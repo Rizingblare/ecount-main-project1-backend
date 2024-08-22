@@ -8,7 +8,7 @@ using static Command.UpdateProductDac;
 
 namespace Command
 {
-    public class UpdateProductDac : BaseCommand<UpdateProductDacRequestDto, CommandResultWithBody<int>>
+    public class UpdateProductDac : BaseCommand<CommandResultWithBody<int>>
     {
         public override void ExecuteCore()
         {

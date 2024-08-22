@@ -90,15 +90,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="01 Command\IExecutable.cs" />
+    <Compile Include="01 Core\Constants\BaseConstants.cs" />
+    <Compile Include="01 Core\Constants\ComparisonOperators.cs" />
     <Compile Include="02 Extension\Extension.cs" />
+    <Compile Include="01 Core\QueryBuilder\BaseQueryBuilder.cs" />
+    <Compile Include="01 Core\QueryBuilder\DeleteQueryBuilder.cs" />
+    <Compile Include="01 Core\QueryBuilder\QueryBuilder.cs" />
+    <Compile Include="01 Core\QueryBuilder\SelectQueryBuilder.cs" />
+    <Compile Include="01 Core\QueryBuilder\UpdateQueryBuilder.cs" />
     <Compile Include="03 PipeLine\PipeLine.cs" />
     <Compile Include="03 PipeLine\PipeLineItem.cs" />
     <Compile Include="03 PipeLine\IPipeLineItem.cs" />
-    <Compile Include="01 Command\ICommand.cs" />
-    <Compile Include="01 Command\BaseRequest.cs" />
-    <Compile Include="01 Command\BaseResponse.cs" />
-    <Compile Include="01 Command\BaseCommand.cs" />
+    <Compile Include="01 Core\ICommand.cs" />
+    <Compile Include="01 Core\BaseRequest.cs" />
+    <Compile Include="01 Core\BaseResponse.cs" />
+    <Compile Include="01 Core\BaseCommand.cs" />
     <Compile Include="04 Data\Dac\Product\InsertProductDac.cs" />
     <Compile Include="04 Data\Dac\Product\SelectProductDac.cs" />
     <Compile Include="04 Data\Dac\Sale\InsertSaleDac.cs" />
@@ -107,8 +113,8 @@
     <Compile Include="04 Data\Entity\Product.cs" />
     <Compile Include="04 Data\Entity\Sale.cs" />
     <Compile Include="04 Data\IEntity.cs" />
-    <Compile Include="05 Error\BaseError.cs" />
-    <Compile Include="05 Error\CreateTestError.cs" />
+    <Compile Include="01 Core\Error\BaseError.cs" />
+    <Compile Include="01 Core\Error\CreateTestError.cs" />
     <Compile Include="06 BizDomain\CRUD\Prod\CreateProdCommand.cs" />
     <Compile Include="06 BizDomain\Request\CommandRequest.cs" />
     <Compile Include="06 BizDomain\Result\CommandResultWithBody.cs" />
@@ -123,6 +129,14 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="01 Core\QueryBuilder\InsertQueryBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="01 Core\Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
