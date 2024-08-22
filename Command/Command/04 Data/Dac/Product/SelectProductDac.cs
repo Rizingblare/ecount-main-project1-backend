@@ -8,14 +8,23 @@ using static Command.SelectProductDac;
 
 namespace Command
 {
-    public class SelectProductDac : BaseCommand<SelectProductDacRequestDto, CommandResultWithBody<List<Product>>>
+    public class SelectProductDac : BaseCommand<CommandResultWithBody<List<Product>>>
     {
         public override void ExecuteCore()
         {
+            var queryBuilder = new QueryBuilder();
+
+            queryBuilder
+                .Select()
+                .From(SelectProductDacDTO.Table)
+                .Where(SelectProductDacDTO.Clauses)
+                .Build();
+                
             var sql = @"
                 SELECT *
                 FROM flow.product_kjd
                 WHERE com_code = @com_code and prod_cd = @prod_cd
+                ORDER BY write_dt
             ";
 
             var parameters = new Dictionary<string, object>()
@@ -33,6 +42,7 @@ namespace Command
                 data.PROD_NM = reader["prod_nm"].ToString();
                 data.WRITE_DT = (DateTime)reader["write_dt"];
             });
+            
 
         }
 

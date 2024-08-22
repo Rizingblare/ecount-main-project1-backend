@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Command
 {
     public class PipeLineItem<TCommand, TResult> : IPipeLineItem
-        where TCommand : IExecutable
+        where TCommand : BaseCommand<TResult>
         where TResult : BaseResponse, new()
     {
         private List<BaseError> _errors = new List<BaseError>();
@@ -42,14 +42,8 @@ namespace Command
             }
             _command.Execute();
 
-            dynamic dCommand = _command;
-            try {
-                _result = dCommand.Result;
-            }
-            catch (RuntimeBinderException ex)
-            {
-                Console.WriteLine("올바른 커맨드 타입이 아닙니다: " + ex.Message);
-            }
+            _result = _command.Result;
+
             _executed?.Invoke(_result);
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class CreateProdCommand: BaseCommand<CommandRequest, CommandResultWithBody<string>>
+    public class CreateProdCommand: BaseCommand<CommandResultWithBody<string>>
     {
         public override void Init()
         {
