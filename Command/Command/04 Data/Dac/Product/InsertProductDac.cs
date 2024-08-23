@@ -7,30 +7,17 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class InsertProductDac : BaseCommand<CommandResultWithBody<int>>
+    public class InsertProductDac : BaseCommand<InsertRequestDto, CommandResultWithBody<int>>
     {
-        public Product Entity { get; set; }
-
         public override void ExecuteCore()
         {
-            var sql = @"
-                INSERT INTO flow.product_kjd (com_code, prod_cd, prod_nm, price, write_dt)
-                VALUES (@com_code, @prod_cd, @prod_nm, @price, @write_dt)
-            ";
-
-            var parameters = new Dictionary<string, object>()
-            {
-                { "@com_code", Entity.Key.COM_CODE },
-                { "@prod_cd", Entity.Key.PROD_CD },
-                { "@prod_nm", Entity.PROD_NM },
-                { "@price", Entity.PRICE },
-                { "@write_dt", Entity.WRITE_DT }
-            };
+            (var sql, var parameters) = QueryBuilderFactory
+                .Insert(Request.TableName)
+                .Into(Request.fieldValues)
+                .Build();
 
             var dbManager = new DbManager();
             this.Result.Body = dbManager.Execute(sql, parameters);
-            //parameters.Add("@com_code", "80000");
-
         }
     }
 }

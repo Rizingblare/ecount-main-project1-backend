@@ -12,29 +12,27 @@ namespace Command
         private List<string> values = new List<string>();
         private string table;
 
-        public InsertQueryBuilder Into(string table)
+        public InsertQueryBuilder Insert(string table)
         {
             this.table = table;
             return this;
         }
 
-        public InsertQueryBuilder Columns(List<string> columns)
+        public InsertQueryBuilder Into(Dictionary<string, object> fieldValues)
         {
-            this.columns.AddRange(columns);
+            foreach (var field in fieldValues)
+            {
+                columns.Add(field.Key);
+                values.Add(AddParameter(field.Value));
+            }
             return this;
         }
 
-        public InsertQueryBuilder Values(List<string> values)
-        {
-            this.values.AddRange(values);
-            return this;
-        }
-
-        public override string GenerateQuery()
+        public override (string, Dictionary<string, object>) Build()
         {
             query.Append($"INSERT INTO {table} ({string.Join(", ", columns)}) ");
             query.Append($"VALUES ({string.Join(", ", values)}) ");
-            return query.ToString().Trim();
+            return (query.ToString().Trim(), parameters);
         }
     }
 

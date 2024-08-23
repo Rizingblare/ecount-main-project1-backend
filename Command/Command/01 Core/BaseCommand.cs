@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public abstract class BaseCommand<TResult> : ICommand<TResult>
+    public abstract class BaseCommand<TRequest, TResult> : ICommand<TRequest, TResult>
+        where TRequest : BaseRequest
         where TResult : BaseResponse, new()
     {
+        public TRequest Request { get; set; }   
         public TResult Result { get; set; }
         private List<BaseError> _errors = new List<BaseError>();
         public List<BaseError> Errors { get { return _errors; } }

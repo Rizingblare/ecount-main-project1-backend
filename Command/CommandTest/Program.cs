@@ -71,6 +71,7 @@ namespace CommandTest
             }
 
         }
+
         private static void CreateProduct()
         {
             CreateProductExecute(CreateProductIO());
@@ -81,27 +82,27 @@ namespace CommandTest
         }
         private static void UpdateProduct()
         {
-            UpdateProductExecute(UpdateProductIO());
+            //UpdateProductExecute(UpdateProductIO());
         }
         private static void DeleteProduct()
         {
-            DeleteProductExecute(DeleteProductIO());
+            //DeleteProductExecute(DeleteProductIO());
         }
         private static void CreateSale()
         {
-            CreateSaleExecute(CreateSaleIO());
+            //CreateSaleExecute(CreateSaleIO());
         }
         private static void ReadSale()
         {
-            ReadSaleExecute(ReadSaleIO());
+            //ReadSaleExecute(ReadSaleIO());
         }
         private static void UpdateSale()
         {
-            UpdateSaleExecute(UpdateSaleIO());
+            //UpdateSaleExecute(UpdateSaleIO());
         }
         private static void DeleteSale()
         {
-            DeleteSaleExecute(DeleteSaleIO());
+            //DeleteSaleExecute(DeleteSaleIO());
         }
 
 
@@ -125,23 +126,18 @@ namespace CommandTest
                     .AddFilter((cmd) => true)
                     .Mapping((cmd) =>
                     {
-                        cmd.Entity = new Product()
-                        {
-                            Key = new ProductKey()
-                            {
-                                COM_CODE = dto.comCode,
-                                PROD_CD = dto.prodCd
-                            },
-                            PRICE = dto.price,
-                            PROD_NM = dto.prodNm,
-                            WRITE_DT = DateTime.Now
-                        };
+                        cmd.Request = new InsertRequestDto("flow.product_kjd");
+                        cmd.Request.fieldValues.Add("com_code", dto.comCode);
+                        cmd.Request.fieldValues.Add("prod_cd", dto.prodCd);
+                        cmd.Request.fieldValues.Add("price", dto.price);
+                        cmd.Request.fieldValues.Add("prod_nm", dto.prodNm);
+                        cmd.Request.fieldValues.Add("write_dt", DateTime.Now);
                     })
                     .Executed((res) => Console.WriteLine($"{res.Body}개 처리 완료됨."));
 
             pipeLine.Execute();
         }
-
+        
         private static ReadInputDTO ReadProductIO()
         {
             Console.WriteLine(MessageConstants.Product.INPUT_COM_CODE_FOR_READ);
@@ -154,16 +150,16 @@ namespace CommandTest
 
         private static void ReadProductExecute(ReadInputDTO dto)
         {
+            Console.WriteLine("1");
             var pipeLine = new PipeLine();
             pipeLine.Register<SelectProductDac, CommandResultWithBody<List<Product>>>(new SelectProductDac())
                     .AddFilter((cmd) => true)
                     .Mapping((cmd) =>
                     {
-                        cmd.Request = new SelectProductDacRequestDto()
-                        {
-                            ComCode = dto.comCode,
-                            ProdCd = dto.prodCd
-                        };
+                        var reqDto = new SelectRequestDto("flow.product_kjd");
+                        reqDto.WhereConditions.Add(new WhereConditionDto("prod_cd", dto.prodCd));
+                        reqDto.WhereConditions.Add(new WhereConditionDto("com_code", dto.comCode));
+                        cmd.Request = reqDto;
                     })
                     .Executed((res) =>
                     {
@@ -172,10 +168,9 @@ namespace CommandTest
                             Console.WriteLine($"작성일: {r.WRITE_DT}, 가격: {r.PRICE}");
                         }
                     });
-
             pipeLine.Execute();
         }
-
+        /*
         private static UpdateInputDTO UpdateProductIO()
         {
             Console.WriteLine(MessageConstants.Product.INPUT_COM_CODE_FOR_UPDATE);
@@ -380,7 +375,7 @@ namespace CommandTest
 
             pipeLine.Execute();
         }
-
+        */
         private class CreateInputDTO
         {
             public string comCode { get; set; }
@@ -396,6 +391,7 @@ namespace CommandTest
                 this.prodNm = prodNm;
             }
         }
+        
         private class ReadInputDTO
         {
             public string comCode { get; set; }
@@ -407,6 +403,7 @@ namespace CommandTest
                 this.prodCd = prodCd;
             }
         }
+        /*
         private class UpdateInputDTO
         {
             public string comCode { get; set; }
@@ -491,6 +488,7 @@ namespace CommandTest
                 this.ioNo = ioNo;
             }
         }
+        */
 
         public static class MessageConstants
         {

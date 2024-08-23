@@ -31,7 +31,7 @@ namespace Command
     }
     public static class CommandExtension
     {
-        public static void AddError(this IExecutable executable, BaseError error)
+        public static void AddError(this ICommand executable, BaseError error)
         {
             executable.Errors.Add(error);
         }

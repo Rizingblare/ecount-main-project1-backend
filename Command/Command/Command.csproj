@@ -93,11 +93,12 @@
     <Compile Include="01 Core\Constants\BaseConstants.cs" />
     <Compile Include="01 Core\Constants\ComparisonOperators.cs" />
     <Compile Include="02 Extension\Extension.cs" />
-    <Compile Include="01 Core\QueryBuilder\BaseQueryBuilder.cs" />
-    <Compile Include="01 Core\QueryBuilder\DeleteQueryBuilder.cs" />
-    <Compile Include="01 Core\QueryBuilder\QueryBuilder.cs" />
-    <Compile Include="01 Core\QueryBuilder\SelectQueryBuilder.cs" />
-    <Compile Include="01 Core\QueryBuilder\UpdateQueryBuilder.cs" />
+    <Compile Include="04 Data\Dto\WhereConditionDto.cs" />
+    <Compile Include="04 Data\QueryBuilder\BaseQueryBuilder.cs" />
+    <Compile Include="04 Data\QueryBuilder\DeleteQueryBuilder.cs" />
+    <Compile Include="04 Data\QueryBuilder\QueryBuilderFactory.cs" />
+    <Compile Include="04 Data\QueryBuilder\SelectQueryBuilder.cs" />
+    <Compile Include="04 Data\QueryBuilder\UpdateQueryBuilder.cs" />
     <Compile Include="03 PipeLine\PipeLine.cs" />
     <Compile Include="03 PipeLine\PipeLineItem.cs" />
     <Compile Include="03 PipeLine\IPipeLineItem.cs" />
@@ -110,6 +111,10 @@
     <Compile Include="04 Data\Dac\Sale\InsertSaleDac.cs" />
     <Compile Include="04 Data\Db\DbManager.cs" />
     <Compile Include="04 Data\BaseEntity.cs" />
+    <Compile Include="04 Data\Dto\UpdateRequestDto.cs" />
+    <Compile Include="04 Data\Dto\DeleteRequestDto.cs" />
+    <Compile Include="04 Data\Dto\InsertRequestDto.cs" />
+    <Compile Include="04 Data\Dto\SelectRequestDto.cs" />
     <Compile Include="04 Data\Entity\Product.cs" />
     <Compile Include="04 Data\Entity\Sale.cs" />
     <Compile Include="04 Data\IEntity.cs" />
@@ -130,7 +135,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="01 Core\QueryBuilder\InsertQueryBuilder.cs" />
+    <Compile Include="04 Data\QueryBuilder\InsertQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="01 Core\Utils\" />

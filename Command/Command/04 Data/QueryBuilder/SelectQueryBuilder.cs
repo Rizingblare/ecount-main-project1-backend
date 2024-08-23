@@ -33,7 +33,7 @@ namespace Command
             return this;
         }
 
-        public override string GenerateQuery()
+        public override (string, Dictionary<string, object>) Build()
         {
             if (selectFields.Any())
             {
@@ -45,7 +45,6 @@ namespace Command
             }
 
             query.Append($"FROM {table} ");
-
             BuildWhereClause();
 
             if (orderByFields.Any())
@@ -54,7 +53,7 @@ namespace Command
                 query.Append(string.Join(", ", orderByFields)).Append(" ");
             }
 
-            return query.ToString().Trim();
+            return (query.ToString().Trim(), parameters);
         }
     }
 }

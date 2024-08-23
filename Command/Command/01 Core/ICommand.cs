@@ -11,20 +11,16 @@ namespace Command
         List<BaseError> Errors { get; }
         void Execute();
     }
-    public interface ICommand<TResult>
+    public interface ICommand<TResult> : ICommand
         where TResult : BaseResponse
     {
         TResult Result { get; set; }
-        List<BaseError> Errors { get; }
-        void Execute();
     }
-    public interface ICommand <TRequest, TResult>
+    public interface ICommand <TRequest, TResult> : ICommand
         where TRequest : BaseRequest
         where TResult : BaseResponse
     {
         TRequest Request { get; set; }
         TResult Result { get; set; }
-        List<BaseError> Errors { get; }
-        void Execute();
     }
 }

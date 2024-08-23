@@ -17,21 +17,24 @@ namespace Command
             return this;
         }
 
-        public UpdateQueryBuilder Set(string column, string paramName, object paramValue)
+        public UpdateQueryBuilder Set(Dictionary<string, object> fieldValues)
         {
-            setClauses.Add($"{column} = @{paramName}");
-            parameters[paramName] = paramValue;
+            foreach (var field in fieldValues)
+            {
+                var paramPlaceholder = AddParameter(field.Value);
+                setClauses.Add($"{field.Key} = {paramPlaceholder}");
+            }
             return this;
         }
 
-        public override string GenerateQuery()
+        public override (string, Dictionary<string, object>) Build()
         {
             query.Append($"UPDATE {table} SET ");
             query.Append(string.Join(", ", setClauses)).Append(" ");
 
             BuildWhereClause();
-
-            return query.ToString().Trim();
+            
+            return (query.ToString().Trim(), parameters);
         }
     }
 }

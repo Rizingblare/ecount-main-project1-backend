@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class PipeLine : IExecutable
+    public class PipeLine : ICommand
     {
         private List<BaseError> _errors = new List<BaseError>();
         public List<BaseError> Errors { get { return _errors; } }
@@ -20,7 +20,7 @@ namespace Command
         }
 
         public PipeLineItem<TCommand, TResult> Register<TCommand, TResult>(TCommand command)
-            where TCommand : IExecutable
+            where TCommand : ICommand
             where TResult : BaseResponse, new()
         {
             var item = new PipeLineItem<TCommand, TResult>(command);

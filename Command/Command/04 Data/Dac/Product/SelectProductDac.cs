@@ -8,48 +8,26 @@ using static Command.SelectProductDac;
 
 namespace Command
 {
-    public class SelectProductDac : BaseCommand<CommandResultWithBody<List<Product>>>
+    public class SelectProductDac : BaseCommand<SelectRequestDto, CommandResultWithBody<List<Product>>>
     {
         public override void ExecuteCore()
         {
-            var queryBuilder = new QueryBuilder();
+            SelectQueryBuilder sb = QueryBuilderFactory
+                .Select(Request.SelectFields)
+                .From(Request.TableName)
+                .Where(Request.WhereConditions);
 
-            queryBuilder
-                .Select()
-                .From(SelectProductDacDTO.Table)
-                .Where(SelectProductDacDTO.Clauses)
-                .Build();
-                
-            var sql = @"
-                SELECT *
-                FROM flow.product_kjd
-                WHERE com_code = @com_code and prod_cd = @prod_cd
-                ORDER BY write_dt
-            ";
-
-            var parameters = new Dictionary<string, object>()
-            {
-                {"@com_code", this.Request.ComCode},
-                {"@prod_cd", this.Request.ProdCd}
-            };
+            (var sql, var parameters) = sb.Build();
 
             var dbManager = new DbManager();
-            this.Result.Body = dbManager.Query<Product>(sql, parameters, (reader, data) =>
+            Result.Body = dbManager.Query<Product>(sql, parameters, (reader, data) =>
             {
-                data.Key.COM_CODE = this.Request.ComCode;
-                data.Key.PROD_CD = this.Request.ProdCd;
+                data.Key.COM_CODE = reader["com_code"].ToString();
+                data.Key.PROD_CD = reader["prod_cd"].ToString();
                 data.PRICE = reader.GetInt16(3);
                 data.PROD_NM = reader["prod_nm"].ToString();
                 data.WRITE_DT = (DateTime)reader["write_dt"];
             });
-            
-
-        }
-
-        public class SelectProductDacRequestDto : BaseRequest
-        {
-            public string ComCode { get; set; }
-            public string ProdCd { get; set; }
         }
     }
 }
