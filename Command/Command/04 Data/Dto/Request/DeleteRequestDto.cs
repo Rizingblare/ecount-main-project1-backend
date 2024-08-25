@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public class InsertRequestDto : BaseRequest
+    public class DeleteRequestDto : BaseRequest
     {
         public string TableName { get; set; }
-        public Dictionary<string, object> fieldValues { get; set; } = new Dictionary<string, object>();
+        public List<ConditionDto> WhereConditions { get; set; } = new List<ConditionDto>();
 
-        public InsertRequestDto(string tableName)
+        public DeleteRequestDto(string tableName)
         {
             TableName = tableName;
         }

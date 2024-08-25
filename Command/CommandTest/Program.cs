@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using static Command.ComparisonOperators;
 using static Command.SelectProductDac;
 
 namespace CommandTest
@@ -127,11 +128,11 @@ namespace CommandTest
                     .Mapping((cmd) =>
                     {
                         cmd.Request = new InsertRequestDto("flow.product_kjd");
-                        cmd.Request.fieldValues.Add("com_code", dto.comCode);
-                        cmd.Request.fieldValues.Add("prod_cd", dto.prodCd);
-                        cmd.Request.fieldValues.Add("price", dto.price);
-                        cmd.Request.fieldValues.Add("prod_nm", dto.prodNm);
-                        cmd.Request.fieldValues.Add("write_dt", DateTime.Now);
+                        cmd.Request.FieldValues.Add("com_code", dto.comCode);
+                        cmd.Request.FieldValues.Add("prod_cd", dto.prodCd);
+                        cmd.Request.FieldValues.Add("price", dto.price);
+                        cmd.Request.FieldValues.Add("prod_nm", dto.prodNm);
+                        cmd.Request.FieldValues.Add("write_dt", DateTime.Now);
                     })
                     .Executed((res) => Console.WriteLine($"{res.Body}개 처리 완료됨."));
 
@@ -150,15 +151,57 @@ namespace CommandTest
 
         private static void ReadProductExecute(ReadInputDTO dto)
         {
-            Console.WriteLine("1");
             var pipeLine = new PipeLine();
             pipeLine.Register<SelectProductDac, CommandResultWithBody<List<Product>>>(new SelectProductDac())
                     .AddFilter((cmd) => true)
                     .Mapping((cmd) =>
                     {
-                        var reqDto = new SelectRequestDto("flow.product_kjd");
-                        reqDto.WhereConditions.Add(new WhereConditionDto("prod_cd", dto.prodCd));
-                        reqDto.WhereConditions.Add(new WhereConditionDto("com_code", dto.comCode));
+                        var reqDto = new SelectRequestDto("flow.product_kjd")
+                        {
+
+                             WhereConditions = new List<ConditionDto>
+                            {
+                                new ConditionDto
+                                {
+                                    LeftField = "product_kjd.com_code",
+                                    Operator = ComparisonOperator.Equal,
+                                    RightValue = "COMP001"
+                                }
+                            },
+
+                            JoinConditions = new List<JoinConditionDto>
+                            {
+                                new JoinConditionDto
+                                {
+                                    JoinType = "INNER",  // INNER JOIN
+                                    TableName = "flow.sale_kjd",
+                                    OnConditions = new List<ConditionDto>
+                                    {
+                                        new ConditionDto
+                                        {
+                                            LeftField = "product_kjd.com_code",
+                                            Operator = ComparisonOperator.Equal,
+                                            RightField = "sale_kjd.com_code"
+                                        },
+                                        new ConditionDto
+                                        {
+                                            LeftField = "product_kjd.prod_cd",
+                                            Operator = ComparisonOperator.Equal,
+                                            RightField = "sale_kjd.prod_cd"
+                                        }
+                                    }
+                                }
+                            },
+
+                            OrderByConditions = new List<OrderByConditionDto>
+                            {
+                                new OrderByConditionDto
+                                {
+                                    FieldName = "sale_kjd.io_date",
+                                    SortDirection = "DESC"
+                                }
+                            }
+                        };
                         cmd.Request = reqDto;
                     })
                     .Executed((res) =>

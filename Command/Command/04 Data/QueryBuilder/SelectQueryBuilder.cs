@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Command.ComparisonOperators;
 
 namespace Command
 {
@@ -10,7 +11,9 @@ namespace Command
     {
         private List<string> selectFields = new List<string>();
         private string table;
-        private List<string> orderByFields = new List<string>();
+        private List<string> orderByClauses = new List<string>();
+        private List<string> joinClauses = new List<string>();
+
 
         public SelectQueryBuilder Select(List<string> fields = null)
         {
@@ -27,9 +30,32 @@ namespace Command
             return this;
         }
 
-        public SelectQueryBuilder OrderBy(List<string> fields)
+        public SelectQueryBuilder Join(List<JoinConditionDto> conditions)
         {
-            orderByFields.AddRange(fields);
+            foreach (var join in conditions)
+            {
+                List<string> onClauses = new List<string>();
+
+                foreach (var condition in join.OnConditions)
+                {
+
+                    string conditionRightSide = condition.RightField ?? AddParameter(condition.RightValue);
+                    onClauses.Add($"{condition.LeftField} {ComparisonOperatorConverter.ToSqlOperator(condition.Operator)} {conditionRightSide}");
+                }
+
+                var joinClause = $"{join.JoinType} JOIN {join.TableName} ON {string.Join(" AND ", onClauses)}";  // 여러 조건을 AND로 연결
+                joinClauses.Add(joinClause);
+            }
+            return this;
+        }
+
+        public SelectQueryBuilder OrderBy(List<OrderByConditionDto> conditions = null)
+        {
+            foreach (var condition in conditions)
+            {
+                var orderByClause = $"{condition.FieldName} {condition.SortDirection}";
+                orderByClauses.Add(orderByClause);
+            }
             return this;
         }
 
@@ -45,12 +71,18 @@ namespace Command
             }
 
             query.Append($"FROM {table} ");
+
+            if (joinClauses.Any())
+            {
+                query.Append(string.Join(" ", joinClauses)).Append(" ");
+            }
+
             BuildWhereClause();
 
-            if (orderByFields.Any())
+            if (orderByClauses.Any())
             {
                 query.Append("ORDER BY ");
-                query.Append(string.Join(", ", orderByFields)).Append(" ");
+                query.Append(string.Join(", ", orderByClauses)).Append(" ");
             }
 
             return (query.ToString().Trim(), parameters);

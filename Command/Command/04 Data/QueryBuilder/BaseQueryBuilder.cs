@@ -14,13 +14,14 @@ namespace Command
         protected Dictionary<string, object> parameters = new Dictionary<string, object>();
         protected int parameterIndex = 0;
 
-        public T Where(List<WhereConditionDto> conditions)
+        public T Where(List<ConditionDto> conditions)
         {
             foreach (var condition in conditions)
             {
+
                 string operatorString = ComparisonOperatorConverter.ToSqlOperator(condition.Operator);
-                var paramPlaceholder = AddParameter(condition.Value);
-                whereConditions.Add($"{condition.FieldName} {operatorString} {paramPlaceholder}");
+                string paramPlaceholder = condition.RightField ?? AddParameter(condition.RightValue);
+                whereConditions.Add($"{condition.LeftField} {operatorString} {paramPlaceholder}");
             }
             return (T)this;
         }

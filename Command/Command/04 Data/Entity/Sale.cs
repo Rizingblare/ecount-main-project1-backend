@@ -15,7 +15,7 @@ namespace Command
     }
     public class Sale : BaseEntity<SaleKey>
     {
-        public string PROD_CO {  get; set; }
+        public string PROD_CD {  get; set; }
         public int QTY { get; set; }
         public string REMARK { get; set; }
     }

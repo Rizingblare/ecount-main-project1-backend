@@ -12,22 +12,16 @@ namespace Command
     {
         public override void ExecuteCore()
         {
-            SelectQueryBuilder sb = QueryBuilderFactory
-                .Select(Request.SelectFields)
+            (var sql, var parameters) = QueryBuilderFactory
+                .Select(Request.Fields)
                 .From(Request.TableName)
-                .Where(Request.WhereConditions);
-
-            (var sql, var parameters) = sb.Build();
+                .Where(Request.WhereConditions)
+                .Join(Request.JoinConditions)
+                .OrderBy(Request.OrderByConditions)
+                .Build();
 
             var dbManager = new DbManager();
-            Result.Body = dbManager.Query<Product>(sql, parameters, (reader, data) =>
-            {
-                data.Key.COM_CODE = reader["com_code"].ToString();
-                data.Key.PROD_CD = reader["prod_cd"].ToString();
-                data.PRICE = reader.GetInt16(3);
-                data.PROD_NM = reader["prod_nm"].ToString();
-                data.WRITE_DT = (DateTime)reader["write_dt"];
-            });
+            Result.Body = dbManager.Query<Product>(sql, parameters, ProductMapper.Map);
         }
     }
 }

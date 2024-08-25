@@ -7,15 +7,11 @@ using static Command.ComparisonOperators;
 
 namespace Command
 {
-    public class WhereConditionDto
+    public class ConditionDto
     {
-        public string FieldName { get; set; }
-        public object Value { get; set; }
+        public string LeftField { get; set; }
         public ComparisonOperator Operator { get; set; } = ComparisonOperator.Equal;
-
-        public WhereConditionDto(string FieldName, object Value) {
-            this.FieldName = FieldName;
-            this.Value = Value;
-        }
+        public string RightField { get; set; }
+        public object RightValue { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Command
     {
         public string TableName { get; set; }
         public Dictionary<string, object> SetFields { get; set; } = new Dictionary<string, object>();
-        public List<WhereConditionDto> WhereConditions { get; set; } = new List<WhereConditionDto>();
+        public List<ConditionDto> WhereConditions { get; set; } = new List<ConditionDto>();
 
         public UpdateRequestDto(string tableName)
         {

@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Command
+{
+    public class SelectRequestDto : BaseRequest
+    {
+        public List<string> Fields { get; set; } = new List<string>();
+        public string TableName { get; set; }
+        public List<ConditionDto> WhereConditions { get; set; } = new List<ConditionDto>();
+        public List<OrderByConditionDto> OrderByConditions { get; set; } = new List<OrderByConditionDto>();
+        public List<JoinConditionDto> JoinConditions { get; set; } = new List<JoinConditionDto>();
+        
+        public SelectRequestDto(string tableName)
+        {
+            TableName = tableName;
+        }
+    }
+}

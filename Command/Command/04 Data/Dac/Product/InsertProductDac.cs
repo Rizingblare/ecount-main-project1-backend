@@ -13,7 +13,7 @@ namespace Command
         {
             (var sql, var parameters) = QueryBuilderFactory
                 .Insert(Request.TableName)
-                .Into(Request.fieldValues)
+                .Into(Request.FieldValues)
                 .Build();
 
             var dbManager = new DbManager();
