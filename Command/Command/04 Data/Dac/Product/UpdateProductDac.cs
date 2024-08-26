@@ -20,6 +20,9 @@ namespace Command
 
             var dbManager = new DbManager();
             this.Result.Body = dbManager.Execute(sql, parameters);
+
+            // Todo: 변경된 품목이 Sale 테이블에 해당 품목이 존재하면 Cascade
+            PipeLine pipe = new PipeLine();
         }
     }
 }
