@@ -8,7 +8,6 @@ namespace Command
 {
     public class ComparisonOperators
     {
-        // ComparisonOperators.cs
         public enum ComparisonOperator
         {
             Equal,
@@ -21,7 +20,6 @@ namespace Command
 
         public static class ComparisonOperatorConverter
         {
-            // 딕셔너리를 사용하여 연산자 매핑
             private static readonly Dictionary<ComparisonOperator, string> OperatorMappings = new Dictionary<ComparisonOperator, string>
             {
                 { ComparisonOperator.Equal, "=" },
@@ -32,7 +30,6 @@ namespace Command
                 { ComparisonOperator.LessOrEqual, "<=" }
             };
 
-            // 열거형을 SQL 연산자로 변환하는 메서드
             public static string ToSqlOperator(ComparisonOperator comparisonOperator)
             {
                 if (OperatorMappings.TryGetValue(comparisonOperator, out var sqlOperator))

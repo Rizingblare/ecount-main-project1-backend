@@ -16,7 +16,6 @@ namespace Command
                 .Select(Request.Fields)
                 .From(Request.TableName)
                 .Where(Request.WhereConditions)
-                .Join(Request.JoinConditions)
                 .OrderBy(Request.OrderByConditions)
                 .Build();
 
