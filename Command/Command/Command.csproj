@@ -93,6 +93,7 @@
     <Compile Include="01 Core\Constants\BaseConstants.cs" />
     <Compile Include="01 Core\Constants\ComparisonOperators.cs" />
     <Compile Include="02 Extension\Extension.cs" />
+    <Compile Include="04 Data\Dac\Product\ValidateDeleteProductDac.cs" />
     <Compile Include="04 Data\Dto\Condition\JoinConditionDto.cs" />
     <Compile Include="04 Data\Dto\Condition\OrderByCondtionDto.cs" />
     <Compile Include="04 Data\Dto\Condition\ConditionDto.cs" />

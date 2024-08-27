@@ -12,6 +12,8 @@ namespace Command
     {
         public override void ExecuteCore()
         {
+            ValidateUpdateProduct();
+
             (var sql, var parameters) = QueryBuilderFactory
                 .Update(Request.TableName)
                 .Set(Request.SetFields)
@@ -20,9 +22,15 @@ namespace Command
 
             var dbManager = new DbManager();
             this.Result.Body = dbManager.Execute(sql, parameters);
+        }
 
-            // Todo: 변경된 품목이 Sale 테이블에 해당 품목이 존재하면 Cascade
-            PipeLine pipe = new PipeLine();
+        private void ValidateUpdateProduct()
+        {
+            if (Request.SetFields.ContainsKey(ProductColumns.PROD_CD)
+                || Request.SetFields.ContainsKey(ProductColumns.COM_CODE))
+            {
+                throw new InvalidOperationException();
+            }
         }
     }
 }

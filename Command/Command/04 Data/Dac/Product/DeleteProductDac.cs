@@ -12,8 +12,8 @@ namespace Command
     {
         public override void ExecuteCore()
         {
-            // Todo: Sale 테이블에 해당 품목이 존재하는지 확인 후 존재하면 예외 처리
-            PipeLine pipe = new PipeLine();
+            // TODO: Sale 테이블에 해당 품목코드를 사용하고 있으면 예외 처리 (유효성 검사)
+            ValidateDeleteProduct();
 
             (var sql, var parameters) = QueryBuilderFactory
                 .Delete(Request.TableName)
@@ -22,6 +22,14 @@ namespace Command
 
             var dbManager = new DbManager();
             this.Result.Body = dbManager.Execute(sql, parameters);
+        }
+
+        private void ValidateDeleteProduct()
+        {
+            // TODO: Sale 테이블에 해당 품목코드를 사용하고 있으면 예외 처리 (유효성 검사)
+            PipeLine pipe = new PipeLine();
+            pipe.Register<SelectSaleDac, CommandResultWithBody<Sale>>(new SelectSaleDac());
+            throw new NotImplementedException();
         }
     }
 }

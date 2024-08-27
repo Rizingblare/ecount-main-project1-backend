@@ -13,6 +13,8 @@ namespace Command
         private string table;
         private List<string> orderByClauses = new List<string>();
         private List<string> joinClauses = new List<string>();
+        private int? limit;
+        private int? offset;
 
 
         public SelectQueryBuilder Select(List<string> fields = null)
@@ -58,6 +60,17 @@ namespace Command
             }
             return this;
         }
+        public SelectQueryBuilder Limit(int limit)
+        {
+            this.limit = limit;
+            return this;
+        }
+
+        public SelectQueryBuilder Offset(int offset)
+        {
+            this.offset = offset;
+            return this;
+        }
 
         public override (string, Dictionary<string, object>) Build()
         {
@@ -83,6 +96,16 @@ namespace Command
             {
                 query.Append("ORDER BY ");
                 query.Append(string.Join(", ", orderByClauses)).Append(" ");
+            }
+
+            if (limit.HasValue)
+            {
+                query.Append($"LIMIT {limit.Value} ");
+            }
+
+            if (offset.HasValue)
+            {
+                query.Append($"OFFSET {offset.Value} ");
             }
 
             return (query.ToString().Trim(), parameters);

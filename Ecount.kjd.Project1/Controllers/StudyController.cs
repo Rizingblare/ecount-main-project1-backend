@@ -11,6 +11,7 @@ namespace Ecount.kjd.Project1.Controllers
         public ActionResult Index()
         {
             return View();
+
         }
         public ActionResult Test()
         {
