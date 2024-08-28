@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>품목조회</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">■ 품목조회</h1>
+        <form action="#" method="get">
+            <div class="row">
+                <label for="prodCode">품목코드</label>
+                <input type="text" id="prodCode" name="prodCode" placeholder="품목코드">
+            </div>
+            <div class="row">
+                <label for="prodName">품목명</label>
+                <input type="text" id="prod" name="prodName" placeholder="품목명">
+            </div>
+            <button id="searchBtn" class="searchBtn">검색</button>
+        </form>
+        <div class="pagination">
+            <button id="prevBtn">이전</button>
+            <button id="nextBtn">다음</button>
+        </div>
+        <table class="tb">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="selectAllCheckbox"></th>
+                    <th>품목코드</th>
+                    <th>품목명</th>
+                    <th>단가</th>
+                    <th>수정</th>
+                </tr>
+            </thead>
+            <tbody id="mainList">
+            </tbody>
+        </table>
+        <div id="btnList" class="btnList">
+            <div id="submitBtnArea"></div>
+            <button id="addBtn">신규</button>
+            <button id="seletedDeleteBtn">선택삭제</button>
+            <div id="mainPageBtnArea"></div>
+            <div id="closeBtnArea"></div>
+        </div>
+    </div>
+    <script type="module" src="./prod/prod.js"></script>
+</body>
+</html>
