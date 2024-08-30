@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Command">
+      <HintPath>..\Command\Command\bin\Debug\Command.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -129,12 +132,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Core\ApiUtils.cs" />
+    <Compile Include="Models\Product\ProductRequestDTO.cs" />
+    <Compile Include="Models\Product\ProductService.cs" />
+    <Compile Include="Models\Product\ProductResultDTO.cs" />
+    <Compile Include="Models\Sale\SaleRequestDTO.cs" />
+    <Compile Include="Models\Sale\SaleResultDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,33 +184,32 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\src\common.css" />
-    <Content Include="Scripts\src\config\config.js" />
-    <Content Include="Scripts\src\config\messageConstants.js" />
-    <Content Include="Scripts\src\dummys\dummys.js" />
-    <Content Include="Scripts\src\index.html" />
-    <Content Include="Scripts\src\model\BaseDTO.js" />
-    <Content Include="Scripts\src\model\DTOFactory.js" />
-    <Content Include="Scripts\src\model\ProdDTO.js" />
-    <Content Include="Scripts\src\model\SaleDTO.js" />
-    <Content Include="Scripts\src\prod.html" />
-    <Content Include="Scripts\src\prodEdit.html" />
-    <Content Include="Scripts\src\prod\prod.js" />
-    <Content Include="Scripts\src\prod\prodEdit\prodEdit.js" />
-    <Content Include="Scripts\src\prod\prodEdit\prodEditEventHandler.js" />
-    <Content Include="Scripts\src\prod\prodEventHandler.js" />
-    <Content Include="Scripts\src\prod\selectedProdHandler.js" />
-    <Content Include="Scripts\src\sale.html" />
-    <Content Include="Scripts\src\saleEdit.html" />
-    <Content Include="Scripts\src\sale\sale.js" />
-    <Content Include="Scripts\src\sale\saleEdit\saleEdit.js" />
-    <Content Include="Scripts\src\sale\saleEdit\saleEditEventHandler.js" />
-    <Content Include="Scripts\src\sale\saleEventHandler.js" />
-    <Content Include="Scripts\src\utils\checkboxHandler.js" />
-    <Content Include="Scripts\src\utils\localStorageHandler.js" />
-    <Content Include="Scripts\src\utils\pagingHandler.js" />
-    <Content Include="Scripts\src\utils\popupHandler.js" />
-    <Content Include="Scripts\src\utils\utils.js" />
+    <Content Include="Static\common.css" />
+    <Content Include="Static\src\config\config.js" />
+    <Content Include="Static\src\config\messageConstants.js" />
+    <Content Include="Static\src\dummys\dummys.js" />
+    <Content Include="Static\src\model\BaseDTO.js" />
+    <Content Include="Static\src\model\DTOFactory.js" />
+    <Content Include="Static\src\model\ProdDTO.js" />
+    <Content Include="Static\src\model\SaleDTO.js" />
+    <Content Include="Static\prod.html" />
+    <Content Include="Static\prodEdit.html" />
+    <Content Include="Static\src\prod\prod.js" />
+    <Content Include="Static\src\prod\prodEdit\prodEdit.js" />
+    <Content Include="Static\src\prod\prodEdit\prodEditEventHandler.js" />
+    <Content Include="Static\src\prod\prodEventHandler.js" />
+    <Content Include="Static\src\prod\selectedProdHandler.js" />
+    <Content Include="Static\sale.html" />
+    <Content Include="Static\saleEdit.html" />
+    <Content Include="Static\src\sale\sale.js" />
+    <Content Include="Static\src\sale\saleEdit\saleEdit.js" />
+    <Content Include="Static\src\sale\saleEdit\saleEditEventHandler.js" />
+    <Content Include="Static\src\sale\saleEventHandler.js" />
+    <Content Include="Static\src\utils\checkboxHandler.js" />
+    <Content Include="Static\src\utils\localStorageHandler.js" />
+    <Content Include="Static\src\utils\pagingHandler.js" />
+    <Content Include="Static\src\utils\popupHandler.js" />
+    <Content Include="Static\src\utils\utils.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -218,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

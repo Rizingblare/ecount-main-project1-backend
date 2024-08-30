@@ -1,4 +1,5 @@
 import { URL } from "../config/config.js";
+import { ALERT_EVENT_MESSAGES } from "../config/messageConstants.js";
 
 export function updateSelectedProds(event) {
     const selectedProdItemsDTO = event.data.selectedProdItemsDTO;

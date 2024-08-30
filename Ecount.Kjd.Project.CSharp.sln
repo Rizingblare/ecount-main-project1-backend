@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecount.Kjd.Project.CSharp", "Ecount.Kjd.Project.CSharp\Ecount.Kjd.Project.CSharp.csproj", "{018F8B6A-49BF-49FD-B535-4F4651DB8FDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Command", "Command\Command\Command.csproj", "{4A9F76E3-3B42-48CD-8CBC-1D3A6A282930}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{018F8B6A-49BF-49FD-B535-4F4651DB8FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{018F8B6A-49BF-49FD-B535-4F4651DB8FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{018F8B6A-49BF-49FD-B535-4F4651DB8FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9F76E3-3B42-48CD-8CBC-1D3A6A282930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9F76E3-3B42-48CD-8CBC-1D3A6A282930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9F76E3-3B42-48CD-8CBC-1D3A6A282930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9F76E3-3B42-48CD-8CBC-1D3A6A282930}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

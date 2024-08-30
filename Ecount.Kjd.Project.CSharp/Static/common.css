@@ -107,6 +107,13 @@ input[type="text"] {
 }
 
 /* 버튼 리스트 스타일 */
+
+button a {
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+}
+
 .btnList {
     display: flex;
     text-align: right;

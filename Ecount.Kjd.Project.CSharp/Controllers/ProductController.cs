@@ -1,35 +1,69 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using Command;
+using Ecount.Kjd.Project.CSharp.Models.Product;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Ecount.Kjd.Project.CSharp.Controllers
 {
-    public class ProductController : ApiController
+    [RoutePrefix("api/product")]
+    public class ProductController : Controller
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        private readonly ProductService productService = new ProductService();
+
+        [HttpGet]
+        [Route("select")]
+        public JsonResult SelectProducts()
         {
-            return new string[] { "value1", "value2" };
+            var data = productService.SelectProducts();
+            var response = new ApiUtils<ProductResultDTO.SelectProductResultDTO>()
+            {
+                Success = true,
+                Response = data,
+                Error = null
+            };
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpPost]
+        [Route("insert")]
+        public JsonResult InsertProducts(ProductRequestDTO.InsertProductRequestDTO request)
         {
-            return "value";
+            var data = productService.InsertProducts();
+            var response = new ApiUtils<ProductResultDTO.InsertProductResultDTO>()
+            {
+                Success = true,
+                Response = null,
+                Error = null
+            };
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
+        [HttpPost]
+        [Route("update")]
+        public JsonResult UpdateProducts(ProductRequestDTO.UpdateProductRequestDTO request)
         {
+            var data = productService.UpdateProducts();
+            var response = new ApiUtils<ProductResultDTO.UpdateProductResultDTO>()
+            {
+                Success = true,
+                Response = null,
+                Error = null
+            };
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("delete")]
+        public JsonResult DeleteProducts(List<ProductRequestDTO.DeleteProductRequestDTO> request)
         {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            var data = productService.DeleteProducts();
+            var response = new ApiUtils<ProductResultDTO.DeleteProductResultDTO>()
+            {
+                Success = true,
+                Response = null,
+                Error = null
+            };
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }
