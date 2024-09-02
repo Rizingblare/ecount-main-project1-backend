@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using static Command.ComparisonOperators;
@@ -18,13 +19,24 @@ namespace Command
         {
             foreach (var condition in conditions)
             {
-
-                string operatorString = ComparisonOperatorConverter.ToSqlOperator(condition.Operator);
-                string paramPlaceholder = condition.RightField ?? AddParameter(condition.RightValue);
-                whereConditions.Add($"{condition.LeftField} {operatorString} {paramPlaceholder}");
+                if (condition.IsInCondition && condition.Value is IEnumerable<object> values)
+                {
+                    // IN 조건 처리
+                    string inClause = string.Join(", ", values.Select(v => AddParameter(v)));
+                    whereConditions.Add($"{condition.LeftField} IN ({inClause})");
+                }
+                else
+                {
+                    // 단일 조건 처리
+                    string paramPlaceholder = AddParameter(condition.Value);
+                    string operatorString = ComparisonOperatorConverter.ToSqlOperator(condition.Operator);
+                    whereConditions.Add($"{condition.LeftField} {operatorString} {paramPlaceholder}");
+                }
             }
-            return (T)this;
+
+            return (T) this;
         }
+
         protected string AddParameter(object value)
         {
             var paramPlaceholder = $"@param{parameterIndex++}";

@@ -1,35 +1,51 @@
 ﻿using System.Collections.Generic;
-using System.Web.Http;
+using System.Reflection.Emit;
+using System.Web;
+using System.Web.Mvc;
 
-namespace Ecount.Kjd.Project.CSharp.Controllers
+namespace Ecount.Kjd.Project.CSharp
 {
-    public class SaleController : ApiController
+    [RoutePrefix("api/sale")]
+    public class SaleController : Controller
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        private readonly ISaleService saleService = new SaleServiceImpl();
+
+        [HttpGet]
+        [Route("select")]
+        public JsonResult SelectSales()
         {
-            return new string[] { "value1", "value2" };
+            CookieHandler.GetOrSetComCode(Request, Response);
+
+            var data = saleService.SelectSales();
+            var response = ApiUtils.Success(data);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpPost]
+        [Route("insert")]
+        public JsonResult InsertSales(SaleRequestDTO.InsertSaleRequestDTO request)
         {
-            return "value";
+            var comCode = CookieHandler.GetOrSetComCode(Request, Response);
+            saleService.InsertSales(comCode, request);
+            return Json(ApiUtils.Success<object>(null));
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
+        [HttpPost]
+        [Route("update")]
+        public JsonResult UpdateSales(SaleRequestDTO.UpdateSaleRequestDTO request)
         {
+            var comCode = CookieHandler.GetOrSetComCode(Request, Response);
+            saleService.UpdateSales(comCode, request);
+            return Json(ApiUtils.Success<object>(null));
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("delete")]
+        public JsonResult DeleteSales(List<SaleRequestDTO.DeleteSaleRequestDTO> request)
         {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            var comCode = CookieHandler.GetOrSetComCode(Request, Response);
+            saleService.DeleteSales(comCode, request);
+            return Json(ApiUtils.Success<object>(null));
         }
     }
 }

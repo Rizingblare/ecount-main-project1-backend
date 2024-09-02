@@ -15,7 +15,8 @@ namespace Command
             GreaterThan,
             LessThan,
             GreaterOrEqual,
-            LessOrEqual
+            LessOrEqual,
+            In
         }
 
         public static class ComparisonOperatorConverter
@@ -27,7 +28,9 @@ namespace Command
                 { ComparisonOperator.GreaterThan, ">" },
                 { ComparisonOperator.LessThan, "<" },
                 { ComparisonOperator.GreaterOrEqual, ">=" },
-                { ComparisonOperator.LessOrEqual, "<=" }
+                { ComparisonOperator.LessOrEqual, "<=" },
+                { ComparisonOperator.In, " IN " }
+
             };
 
             public static string ToSqlOperator(ComparisonOperator comparisonOperator)

@@ -16,5 +16,6 @@ namespace Command
         public string PROD_NM { get; set; }
         public int PRICE { get; set; }
         public DateTime WRITE_DT { get; set; }
+        public bool IS_USED { get; set; }
     }
 }

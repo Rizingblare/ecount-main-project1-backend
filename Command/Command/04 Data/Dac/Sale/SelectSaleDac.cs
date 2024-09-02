@@ -18,7 +18,7 @@ namespace Command
                 .Build();
 
             var dbManager = new DbManager();
-            this.Result.Body = dbManager.Query<Sale>(sql, parameters, SaleMapper.Map);
+            this.Result.Body = dbManager.Query<Sale>(sql, parameters, SaleResultMapper.Map);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Command
         public override void ExecuteCore()
         {
             // TODO: Sale 테이블에 해당 품목코드를 사용하고 있으면 예외 처리 (유효성 검사)
-            ValidateDeleteProduct();
+            //ValidateDeleteProduct();
 
             (var sql, var parameters) = QueryBuilderFactory
                 .Delete(Request.TableName)

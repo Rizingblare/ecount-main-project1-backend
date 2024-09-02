@@ -11,7 +11,7 @@ namespace Command
     {
         public string LeftField { get; set; }
         public ComparisonOperator Operator { get; set; } = ComparisonOperator.Equal;
-        public string RightField { get; set; }
-        public object RightValue { get; set; }
+        public object Value { get; set; } // 조건 값 (단일 값 또는 리스트)
+        public bool IsInCondition { get; set; } = false; // IN 조건인지 여부
     }
 }

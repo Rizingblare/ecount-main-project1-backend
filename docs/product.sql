@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS flow.product_kjd
     prod_nm character varying(100),
     price integer,
     write_dt timestamp without time zone NOT NULL,
+    is_used boolean,
     CONSTRAINT prod_kjd_pkey PRIMARY KEY (com_code, prod_cd)
 );

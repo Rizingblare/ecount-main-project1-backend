@@ -20,7 +20,7 @@ namespace Command
                 .Build();
 
             var dbManager = new DbManager();
-            Result.Body = dbManager.Query<Product>(sql, parameters, ProductMapper.Map);
+            Result.Body = dbManager.Query<Product>(sql, parameters, ProductResultMapper.Map);
         }
     }
 }

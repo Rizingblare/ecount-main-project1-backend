@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,7 +9,6 @@ namespace Ecount.Kjd.Project.CSharp
 {
     public class ApiUtils
     {
-
         public static ApiResult<T> Success<T>(T response)
         {
             return new ApiResult<T>(true, response, null);
@@ -16,37 +16,37 @@ namespace Ecount.Kjd.Project.CSharp
 
         public static ApiResult<object> Error(string message, HttpStatusCode status)
         {
-            return new ApiResult<object>(false, null, new ApiError(status.value(), message));
+            return new ApiResult<object>(false, null, new ApiError((int) status, message));
         }
 
         public static ApiResult<object> Error(BaseException exception)
         {
-            return new ApiResult<>(false, null, new ApiError(exception.getCode(), exception.getMessage()));
+            return new ApiResult<object>(false, null, new ApiError(exception.Code, exception.Message));
         }
 
         public class ApiResult<T>
         {
-            public bool Success { get; }
-            public T Response { get; }
-            public ApiError Error { get; }
+            public bool success { get; }
+            public T response { get; }
+            public ApiError error { get; }
 
             public ApiResult(bool success, T response, ApiError error)
             {
-                Success = success;
-                Response = response;
-                Error = error;
+                this.success = success;
+                this.response = response;
+                this.error = error;
             }
         }
 
         public class ApiError
         {
-            public int Status { get; }
-            public string Message { get; }
+            public int status { get; }
+            public string message { get; }
 
             public ApiError(int status, string message)
             {
-                Status = status;
-                Message = message;
+                this.status = status;
+                this.message = message;
             }
         }
     }

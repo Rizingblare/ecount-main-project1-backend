@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    public static class ProductMapper
+    public static class ProductResultMapper
     {
         public static void Map(DbDataReader reader, Product data)
         {
@@ -16,6 +16,7 @@ namespace Command
             data.PRICE = reader.GetInt16(reader.GetOrdinal(ProductColumns.PRICE));
             data.PROD_NM = reader[ProductColumns.PROD_NM].ToString();
             data.WRITE_DT = (DateTime)reader[ProductColumns.WRITE_DT];
+            data.IS_USED = (bool)reader[ProductColumns.IS_USED];
         }
     }
 }

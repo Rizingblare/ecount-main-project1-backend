@@ -32,6 +32,7 @@ namespace Command
             return this;
         }
 
+        /*
         public SelectQueryBuilder Join(List<JoinConditionDto> conditions)
         {
             foreach (var join in conditions)
@@ -50,6 +51,7 @@ namespace Command
             }
             return this;
         }
+        */
 
         public SelectQueryBuilder OrderBy(List<OrderByConditionDto> conditions = null)
         {

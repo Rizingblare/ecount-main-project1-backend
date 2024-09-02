@@ -99,8 +99,8 @@
     <Compile Include="04 Data\Dto\Condition\ConditionDto.cs" />
     <Compile Include="04 Data\Entity\Columns\ProductColumns.cs" />
     <Compile Include="04 Data\Entity\Columns\SaleColumns.cs" />
-    <Compile Include="04 Data\Entity\Mapper\ProductMapper.cs" />
-    <Compile Include="04 Data\Entity\Mapper\SaleMapper.cs" />
+    <Compile Include="04 Data\Entity\Mapper\ProductResultMapper.cs" />
+    <Compile Include="04 Data\Entity\Mapper\SaleResultMapper.cs" />
     <Compile Include="04 Data\QueryBuilder\BaseQueryBuilder.cs" />
     <Compile Include="04 Data\QueryBuilder\DeleteQueryBuilder.cs" />
     <Compile Include="04 Data\QueryBuilder\QueryBuilderFactory.cs" />
