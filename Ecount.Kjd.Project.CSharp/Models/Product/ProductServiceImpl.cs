@@ -1,28 +1,33 @@
 ﻿using Command;
-using Ecount.Kjd.Project.CSharp.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Web;
 
 namespace Ecount.Kjd.Project.CSharp
 {
     public class ProductServiceImpl : IProductService
     {
-        public ProductResultDTO.SelectProductResultDTO SelectProducts()
+        public ProductResultDTO.SelectProductResultDTO SelectProducts(ProductRequestDTO.SelectProductRequestDTO request)
         {
-            throw new NotImplementedException();
+            var pipeLine = new PipeLine();
+            pipeLine.Register<SelectProductDac, CommandResultWithBody<int>>(new SelectProductDac())
+                .Mapping((cmd) =>
+                {
+                    cmd.Request = ProductDTOConverter.ToSelectRequestDTO(request);
+                });
+            pipeLine.Execute();
+            return new ProductResultDTO.SelectProductResultDTO();
         }
         public void InsertProducts(string comCode, ProductRequestDTO.InsertProductRequestDTO request)
         {
             var pipeLine = new PipeLine();
             pipeLine.Register<InsertProductDac, CommandResultWithBody<int>>(new InsertProductDac())
-                .AddFilter((cmd) => true)
                 .Mapping((cmd) =>
                 {
                     cmd.Request = ProductDTOConverter.ToInsertRequestDTO(comCode, request);
-                })
-                .Executed((res) => Console.WriteLine($"{res.Body}개 처리 완료됨."));
+                });
             pipeLine.Execute();
         }
 
@@ -30,25 +35,31 @@ namespace Ecount.Kjd.Project.CSharp
         {
             var pipeLine = new PipeLine();
             pipeLine.Register<UpdateProductDac, CommandResultWithBody<int>>(new UpdateProductDac())
-                .AddFilter((cmd) => true)
                 .Mapping((cmd) =>
                 {
                     cmd.Request = ProductDTOConverter.ToUpdateRequestDTO(comCode, request);
-                })
-                .Executed((res) => Console.WriteLine($"{res.Body}개 처리 완료됨."));
+                });
             pipeLine.Execute();
         }
 
         public void DeleteProducts(string comCode, List<ProductRequestDTO.DeleteProductRequestDTO> request)
         {
             var pipeLine = new PipeLine();
+            pipeLine.Register<SelectSaleBeforeDeleteProductDac, CommandResultWithBody<int>>(new SelectSaleBeforeDeleteProductDac())
+                .Mapping((cmd) =>
+                {
+                    cmd.Request = SaleDTOConverter.ToSelectSaleBeforeDeleteProductRequestDTO(comCode, request);
+                })
+                .Executed((res) =>
+                {
+                    if (res.Body > 0) throw BaseException.SALE_ALREADY_EXIST;
+                });
+
             pipeLine.Register<DeleteProductDac, CommandResultWithBody<int>>(new DeleteProductDac())
-                .AddFilter((cmd) => true)
                 .Mapping((cmd) =>
                 {
                     cmd.Request = ProductDTOConverter.ToDeleteRequestDTO(comCode, request);
-                })
-                .Executed((res) => Console.WriteLine($"{res.Body}개 처리 완료됨."));
+                });
             pipeLine.Execute();
         }
     }

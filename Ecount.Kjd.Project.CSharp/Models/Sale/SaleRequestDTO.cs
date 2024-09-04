@@ -10,7 +10,15 @@ namespace Ecount.Kjd.Project.CSharp
     {
         public class SelectSaleRequestDTO
         {
-
+            public string searchByDateStart { get; set; }
+            public string searchByDateEnd { get; set; }
+            public string searchByProdCode { get; set; }
+            public bool orderByDate { get; set; }
+            public bool orderByDateASC { get; set; }
+            public bool orderByProdCode { get; set; }
+            public bool orderByProdCodeASC { get; set; }
+            public int pageNum { get; set; }
+            public int pageSize { get; set; }
         }
 
         public class InsertSaleRequestDTO
@@ -20,7 +28,7 @@ namespace Ecount.Kjd.Project.CSharp
             public string prodName { get; set; }
             public int quantity { get; set; }
             public int price { get; set; }
-            public string remarks { get; set; }
+            public string remarks { get; set; } = "";
         }
 
         public class UpdateSaleRequestDTO
@@ -31,7 +39,7 @@ namespace Ecount.Kjd.Project.CSharp
             public string prodName { get; set; }
             public int quantity { get; set; }
             public int price { get; set; }
-            public string remarks { get; set; }
+            public string remarks { get; set; } = "";
         }
         public class DeleteSaleRequestDTO
         {

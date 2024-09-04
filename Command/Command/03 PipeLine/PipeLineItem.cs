@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,25 +47,25 @@ namespace Command
             {
                 _result = dCommand.Result;
             }
-            catch (RuntimeBinderException ex)
+            catch
             {
-                Console.WriteLine("올바른 커맨드 타입이 아닙니다: " + ex.Message);
+                throw new Exception("올바른 커맨드 타입이 아닙니다.");
             }
 
             _executed?.Invoke(_result);
         }
 
-        public PipeLineItem<TCommand, TResult> AddFilter(Predicate<TCommand> filter)
+        public PipeLineItem<TCommand, TResult> AddFilter(Predicate<TCommand> filter = null)
         {
             this._filter += filter;
             return this;
         }
-        public PipeLineItem<TCommand, TResult> Mapping(Action<TCommand> mapper)
+        public PipeLineItem<TCommand, TResult> Mapping(Action<TCommand> mapper = null)
         {
             this._mapper += mapper;
             return this;
         }
-        public PipeLineItem<TCommand, TResult> Executed(Action<TResult> executed)
+        public PipeLineItem<TCommand, TResult> Executed(Action<TResult> executed = null)
         {
             this._executed += executed;
             return this;

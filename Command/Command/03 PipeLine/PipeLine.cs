@@ -10,13 +10,13 @@ namespace Command
 {
     public class PipeLine : ICommand
     {
-        private List<BaseError> _errors = new List<BaseError>();
-        public List<BaseError> Errors { get { return _errors; } }
-        private Queue<IPipeLineItem> items;
+        public List<BaseError> Errors { get; } = new List<BaseError>();
+        private Queue<IPipeLineItem> _items;
+        public Dictionary<string, object> Contexts { get; } = new Dictionary<string, object>();
 
         public PipeLine()
         {
-            this.items = new Queue<IPipeLineItem>();
+            this._items = new Queue<IPipeLineItem>();
         }
 
         public PipeLineItem<TCommand, TResult> Register<TCommand, TResult>(TCommand command)
@@ -24,7 +24,7 @@ namespace Command
             where TResult : BaseResponse, new()
         {
             var item = new PipeLineItem<TCommand, TResult>(command);
-            items.Enqueue(item);
+            _items.Enqueue(item);
             return item;
         }
         /*
@@ -35,10 +35,10 @@ namespace Command
 
         public void Execute()
         {
-            int totalCount = items.Count();
-            while(items.Count > 0)
+            int totalCount = _items.Count();
+            while(_items.Count > 0)
             {
-                var item = items.Dequeue();
+                var item = _items.Dequeue();
                 try
                 {
                     item.Execute();

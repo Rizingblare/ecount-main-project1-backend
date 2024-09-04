@@ -15,15 +15,25 @@ namespace Command
         protected Dictionary<string, object> parameters = new Dictionary<string, object>();
         protected int parameterIndex = 0;
 
-        public T Where(List<ConditionDto> conditions)
+        public T Where(List<BaseConditionDTO> conditions)
         {
             foreach (var condition in conditions)
             {
-                if (condition.IsInCondition && condition.Value is IEnumerable<object> values)
+                if (condition.IsComplexCondition && condition.Value is List<BaseConditionDTO> subConditions)
+                {
+                    // 복합 조건 (AND/OR) 처리
+                    string subClause = BuildComplexCondition(subConditions, condition.IsOrCondition ? "OR" : "AND");
+                    whereConditions.Add($"({subClause})");
+                }
+                else if (condition.IsInCondition && condition.Value is IEnumerable<object> values)
                 {
                     // IN 조건 처리
                     string inClause = string.Join(", ", values.Select(v => AddParameter(v)));
                     whereConditions.Add($"{condition.LeftField} IN ({inClause})");
+                }
+                else if (condition is LikeConditionDTO)
+                {
+                    whereConditions.Add($"({condition.LeftField} LIKE '%{condition.Value}%')");
                 }
                 else
                 {
@@ -34,7 +44,28 @@ namespace Command
                 }
             }
 
-            return (T) this;
+            return (T)this;
+        }
+
+        private string BuildComplexCondition(List<BaseConditionDTO> subConditions, string logicalOperator)
+        {
+            List<string> conditionClauses = new List<string>();
+            foreach(var subCondition in subConditions)
+            {
+                if (subCondition.Value is List<BaseConditionDTO> outerCondition)
+                {
+                    List<string> outerConditionClauses = new List<string>();
+                    foreach (var innerCondition in outerCondition)
+                    {
+                        string paramPlaceholder = AddParameter(innerCondition.Value);
+                        string operatorString = ComparisonOperatorConverter.ToSqlOperator(innerCondition.Operator);
+                        outerConditionClauses.Add($"{innerCondition.LeftField} {operatorString} {paramPlaceholder}");
+                    }
+                    conditionClauses.Add($"({string.Join(" AND ", outerConditionClauses)})");
+                }
+            }
+
+            return string.Join($" {logicalOperator} ", conditionClauses);
         }
 
         protected string AddParameter(object value)

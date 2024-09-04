@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Command
 {
-    internal class ValidateDeleteProductDac
+    public class LikeConditionDTO : BaseConditionDTO
     {
+        
     }
 }

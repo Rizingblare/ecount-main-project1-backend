@@ -12,40 +12,69 @@ namespace Ecount.Kjd.Project.CSharp
 
         [HttpGet]
         [Route("select")]
-        public JsonResult SelectSales()
+        public JsonResult SelectSales(SaleRequestDTO.SelectSaleRequestDTO request)
         {
-            CookieHandler.GetOrSetComCode(Request, Response);
+            try
+            {
+                CookieHandler.GetOrSetComCode(Request, Response);
 
-            var data = saleService.SelectSales();
-            var response = ApiUtils.Success(data);
-            return Json(response, JsonRequestBehavior.AllowGet);
+                var data = saleService.SelectSales(request);
+                var response = ApiUtils.Success(request);
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (BaseException error)
+            {
+                return Json(ApiUtils.Error(error));
+            }
         }
 
         [HttpPost]
         [Route("insert")]
         public JsonResult InsertSales(SaleRequestDTO.InsertSaleRequestDTO request)
         {
-            var comCode = CookieHandler.GetOrSetComCode(Request, Response);
-            saleService.InsertSales(comCode, request);
-            return Json(ApiUtils.Success<object>(null));
+            try
+            {
+                var comCode = CookieHandler.GetOrSetComCode(Request, Response);
+                saleService.InsertSales(comCode, request);
+                return Json(ApiUtils.Success<object>(null));
+            }
+            catch (BaseException error)
+            {
+                return Json(ApiUtils.Error(error));
+            }
         }
 
         [HttpPost]
         [Route("update")]
         public JsonResult UpdateSales(SaleRequestDTO.UpdateSaleRequestDTO request)
         {
-            var comCode = CookieHandler.GetOrSetComCode(Request, Response);
-            saleService.UpdateSales(comCode, request);
-            return Json(ApiUtils.Success<object>(null));
+            try
+            {
+                var comCode = CookieHandler.GetOrSetComCode(Request, Response);
+                saleService.UpdateSales(comCode, request);
+                return Json(ApiUtils.Success<object>(null));
+            }
+            catch (BaseException error)
+            {
+                return Json(ApiUtils.Error(error));
+            }
         }
 
         [HttpPost]
         [Route("delete")]
         public JsonResult DeleteSales(List<SaleRequestDTO.DeleteSaleRequestDTO> request)
         {
-            var comCode = CookieHandler.GetOrSetComCode(Request, Response);
-            saleService.DeleteSales(comCode, request);
-            return Json(ApiUtils.Success<object>(null));
+            try
+            {
+                var comCode = CookieHandler.GetOrSetComCode(Request, Response);
+                saleService.DeleteSales(comCode, request);
+                return Json(ApiUtils.Success<object>(null));
+            }
+            catch (BaseException error)
+            {
+                return Json(ApiUtils.Error(error));
+            }
+
         }
     }
 }

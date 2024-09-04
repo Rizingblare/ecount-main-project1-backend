@@ -141,12 +141,16 @@
     </Compile>
     <Compile Include="Models\Core\ApiUtils.cs" />
     <Compile Include="Models\Core\BaseException.cs" />
+    <Compile Include="Models\Core\ConditionDTOConverter.cs" />
     <Compile Include="Models\Core\CookieHandler.cs" />
+    <Compile Include="Models\Core\OrderByDTOConverter.cs" />
     <Compile Include="Models\Product\ProductDTOConverter.cs" />
     <Compile Include="Models\Product\ProductRequestDTO.cs" />
     <Compile Include="Models\Product\IProductService.cs" />
     <Compile Include="Models\Product\ProductServiceImpl.cs" />
     <Compile Include="Models\Product\ProductResultDTO.cs" />
+    <Compile Include="Models\Sale\SaleDTOConverter.cs" />
+    <Compile Include="Models\Sale\SaleNumDTOConverter.cs" />
     <Compile Include="Models\Sale\SaleRequestDTO.cs" />
     <Compile Include="Models\Sale\SaleResultDTO.cs" />
     <Compile Include="Models\Sale\ISaleService.cs" />

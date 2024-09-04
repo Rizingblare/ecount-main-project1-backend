@@ -10,6 +10,6 @@ namespace Command
     {
         public string JoinType { get; set; } = "INNER";
         public string TableName { get; set; }
-        public List<ConditionDto> OnConditions { get; set; } = new List<ConditionDto>();
+        public List<BaseConditionDTO> OnConditions { get; set; } = new List<BaseConditionDTO>();
     }
 }

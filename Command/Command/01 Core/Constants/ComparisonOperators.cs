@@ -16,7 +16,9 @@ namespace Command
             LessThan,
             GreaterOrEqual,
             LessOrEqual,
-            In
+            And,
+            In,
+            Like
         }
 
         public static class ComparisonOperatorConverter
@@ -29,7 +31,9 @@ namespace Command
                 { ComparisonOperator.LessThan, "<" },
                 { ComparisonOperator.GreaterOrEqual, ">=" },
                 { ComparisonOperator.LessOrEqual, "<=" },
-                { ComparisonOperator.In, " IN " }
+                { ComparisonOperator.And, " AND " },
+                { ComparisonOperator.In, " IN " },
+                { ComparisonOperator.Like, " LIKE " }
 
             };
 

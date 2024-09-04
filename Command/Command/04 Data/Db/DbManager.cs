@@ -73,6 +73,26 @@ namespace Command
             }
         }
 
+        public object Scalar(string sql, Dictionary<string, object> parameters)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = sql;
+
+                    foreach (var param in parameters)
+                    {
+                        cmd.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
+                    }
+
+                    return cmd.ExecuteScalar(); // 단일값을 반환
+                }
+            }
+        }
+
         // Query : 여러건 조회
         // Fetch : 단건 조회 (결과값이 하나)
         // Execute : 실행 (Insert Update 등)

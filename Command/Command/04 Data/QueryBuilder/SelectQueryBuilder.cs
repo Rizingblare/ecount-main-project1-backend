@@ -9,30 +9,30 @@ namespace Command
 {
     public class SelectQueryBuilder : BaseQueryBuilder<SelectQueryBuilder>
     {
-        private List<string> selectFields = new List<string>();
-        private string table;
-        private List<string> orderByClauses = new List<string>();
-        private List<string> joinClauses = new List<string>();
-        private int? limit;
-        private int? offset;
+        private List<string> _selectFields = new List<string>();
+        private string _table;
+        private List<string> _orderByClauses = new List<string>();
+        private List<string> _joinClauses = new List<string>();
+        private int? _limit;
+        private int? _offset;
 
 
         public SelectQueryBuilder Select(List<string> fields = null)
         {
             if (fields != null && fields.Any())
             {
-                selectFields.AddRange(fields);
+                _selectFields.AddRange(fields);
             }
             return this;
         }
 
         public SelectQueryBuilder From(string table)
         {
-            this.table = table;
+            this._table = table;
             return this;
         }
 
-        /*
+
         public SelectQueryBuilder Join(List<JoinConditionDto> conditions)
         {
             foreach (var join in conditions)
@@ -41,73 +41,71 @@ namespace Command
 
                 foreach (var condition in join.OnConditions)
                 {
-
-                    string conditionRightSide = condition.RightField ?? AddParameter(condition.RightValue);
-                    onClauses.Add($"{condition.LeftField} {ComparisonOperatorConverter.ToSqlOperator(condition.Operator)} {conditionRightSide}");
+                    var rightside = condition.IsFieldName ? (string) condition.Value : AddParameter(condition.Value);
+                    onClauses.Add($"{condition.LeftField} {ComparisonOperatorConverter.ToSqlOperator(condition.Operator)} {rightside}");
                 }
 
-                var joinClause = $"{join.JoinType} JOIN {join.TableName} ON {string.Join(" AND ", onClauses)}";  // 여러 조건을 AND로 연결
-                joinClauses.Add(joinClause);
+                var joinClause = $"{join.JoinType} JOIN {join.TableName} ON {string.Join(" AND ", onClauses)}";
+                _joinClauses.Add(joinClause);
             }
             return this;
         }
-        */
 
         public SelectQueryBuilder OrderBy(List<OrderByConditionDto> conditions = null)
         {
             foreach (var condition in conditions)
             {
                 var orderByClause = $"{condition.FieldName} {condition.SortDirection}";
-                orderByClauses.Add(orderByClause);
+                _orderByClauses.Add(orderByClause);
             }
             return this;
         }
-        public SelectQueryBuilder Limit(int limit)
+        public SelectQueryBuilder Limit(int? limit)
         {
-            this.limit = limit;
+            this._limit = limit;
             return this;
         }
 
-        public SelectQueryBuilder Offset(int offset)
+        public SelectQueryBuilder Offset(int? offset)
         {
-            this.offset = offset;
+            this._offset = offset;
             return this;
         }
 
         public override (string, Dictionary<string, object>) Build()
         {
-            if (selectFields.Any())
+            if (_selectFields.Any())
             {
-                query.Append($"SELECT {string.Join(", ", selectFields)} ");
+                query.Append($"SELECT {string.Join(", ", _selectFields)} ");
             }
             else
             {
                 query.Append("SELECT * ");
             }
 
-            query.Append($"FROM {table} ");
+            query.Append($"FROM {_table} ");
 
-            if (joinClauses.Any())
+            if (_joinClauses.Any())
             {
-                query.Append(string.Join(" ", joinClauses)).Append(" ");
+                query.Append(string.Join(" ", _joinClauses)).Append(" ");
             }
 
             BuildWhereClause();
 
-            if (orderByClauses.Any())
+            if (_orderByClauses.Any())
             {
                 query.Append("ORDER BY ");
-                query.Append(string.Join(", ", orderByClauses)).Append(" ");
+                query.Append(string.Join(", ", _orderByClauses)).Append(" ");
             }
 
-            if (limit.HasValue)
+            if (_limit.HasValue)
             {
-                query.Append($"LIMIT {limit.Value} ");
+                query.Append($"LIMIT {_limit.Value} ");
             }
 
-            if (offset.HasValue)
+            if (_offset.HasValue)
             {
-                query.Append($"OFFSET {offset.Value} ");
+                query.Append($"OFFSET {_offset.Value} ");
             }
 
             return (query.ToString().Trim(), parameters);

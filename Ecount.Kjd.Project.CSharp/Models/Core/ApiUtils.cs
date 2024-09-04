@@ -14,14 +14,14 @@ namespace Ecount.Kjd.Project.CSharp
             return new ApiResult<T>(true, response, null);
         }
 
-        public static ApiResult<object> Error(string message, HttpStatusCode status)
+        public static ApiResult<object> Error(string message, int status)
         {
-            return new ApiResult<object>(false, null, new ApiError((int) status, message));
+            return new ApiResult<object>(false, null, new ApiError(status, message));
         }
 
         public static ApiResult<object> Error(BaseException exception)
         {
-            return new ApiResult<object>(false, null, new ApiError(exception.Code, exception.Message));
+            return new ApiResult<object>(false, null, new ApiError(exception.Status, exception.Message));
         }
 
         public class ApiResult<T>

@@ -11,7 +11,15 @@ namespace Ecount.Kjd.Project.CSharp
     {
         public class SelectProductRequestDTO
         {
-            List<OrderByConditionDto> orderByConditions {  get; set; }
+            public string searchByProdCode { get; set; }
+            public string searchByProdName { get; set; }
+            public string searchByIsused { get; set; }
+            public bool orderByProdCode { get; set; }
+            public bool orderByProdCodeASC { get; set; }
+            public bool orderByProdName { get; set; }
+            public bool orderByProdNameASC { get; set; }
+            public int pageNum { get; set; }
+            public int pageSize { get; set; }
         }
 
         public class InsertProductRequestDTO
