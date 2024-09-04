@@ -9,6 +9,6 @@ namespace Command
     public class OrderByConditionDto
     {
         public string FieldName { get; set; }
-        public bool SortDirection { get; set; }
+        public string SortDirection { get; set; }
     }
 }

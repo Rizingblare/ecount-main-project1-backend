@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace Ecount.Kjd.Project.CSharp
 {
@@ -14,19 +15,48 @@ namespace Ecount.Kjd.Project.CSharp
             var result = new SelectRequestDto(ProductColumns.TABLE_NAME);
             result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_CD, request.searchByProdCode));
             result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_NM, request.searchByProdName));
-            result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.IS_USED, request.searchByIsused));
+
+            if (request.searchByIsused == 1)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.IS_USED, true));
+            }
+
+            else if (request.searchByIsused == 2)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.IS_USED, false));
+            }
+
             if (request.orderByProdCode)
             {
                 result.OrderByConditions.Add(OrderByDTOConverter.ToOrderByConditionDTO(ProductColumns.PROD_CD, request.orderByProdCodeASC));
             }
+
             if (request.orderByProdName)
             {
                 result.OrderByConditions.Add(OrderByDTOConverter.ToOrderByConditionDTO(ProductColumns.PROD_NM, request.orderByProdNameASC));
             }
+
             result.Limit = request.pageSize;
             result.Offset = request.pageSize * request.pageNum;
+
             return result;
         }
+
+        public static ProductResultDTO ToSelectResultDTO(List<Product> res)
+        {
+            var result = new ProductResultDTO();
+            result.data = new List<ProductResultDTO.SelectProductResultDTO>();
+            foreach (var r in res)
+            {
+                var item = new ProductResultDTO.SelectProductResultDTO();
+                item.prodCode = r.Key.PROD_CD;
+                item.prodName = r.PROD_NM;
+                item.price = r.PRICE;
+                result.data.Add(item);
+            }
+            return result;
+        }
+
         public static InsertRequestDto ToInsertRequestDTO(string comCode, ProductRequestDTO.InsertProductRequestDTO request)
         {
             var result = new InsertRequestDto(ProductColumns.TABLE_NAME);
@@ -61,5 +91,6 @@ namespace Ecount.Kjd.Project.CSharp
 
             return result;
         }
+
     }
 }

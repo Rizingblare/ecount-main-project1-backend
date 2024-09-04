@@ -9,16 +9,18 @@ namespace Ecount.Kjd.Project.CSharp
 {
     public class ProductServiceImpl : IProductService
     {
-        public ProductResultDTO.SelectProductResultDTO SelectProducts(ProductRequestDTO.SelectProductRequestDTO request)
+        public ProductResultDTO SelectProducts(ProductRequestDTO.SelectProductRequestDTO request)
         {
             var pipeLine = new PipeLine();
-            pipeLine.Register<SelectProductDac, CommandResultWithBody<int>>(new SelectProductDac())
+            var result = new ProductResultDTO();
+            pipeLine.Register<SelectProductDac, CommandResultWithBody<List<Product>>>(new SelectProductDac())
                 .Mapping((cmd) =>
                 {
                     cmd.Request = ProductDTOConverter.ToSelectRequestDTO(request);
-                });
+                })
+                .Executed((res) => result = ProductDTOConverter.ToSelectResultDTO(res.Body));
             pipeLine.Execute();
-            return new ProductResultDTO.SelectProductResultDTO();
+            return result;
         }
         public void InsertProducts(string comCode, ProductRequestDTO.InsertProductRequestDTO request)
         {

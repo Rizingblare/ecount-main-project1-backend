@@ -17,6 +17,8 @@ namespace Command
                 .From(Request.TableName)
                 .Where(Request.WhereConditions)
                 .OrderBy(Request.OrderByConditions)
+                .Limit(Request.Limit)
+                .Offset(Request.Offset)
                 .Build();
 
             var dbManager = new DbManager();

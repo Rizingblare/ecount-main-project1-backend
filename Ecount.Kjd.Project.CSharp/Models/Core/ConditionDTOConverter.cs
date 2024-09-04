@@ -8,6 +8,15 @@ namespace Ecount.Kjd.Project.CSharp
 {
     public class ConditionDTOConverter
     {
+        public static BaseConditionDTO ToConditionDTO(string leftFields, bool rightValue)
+        {
+            return new BaseConditionDTO
+            {
+                LeftField = leftFields,
+                Value = rightValue,
+                Operator = ComparisonOperators.ComparisonOperator.Equal
+            };
+        }
         public static BaseConditionDTO ToConditionDTO(string leftFields, double rightValue)
         {
             return new BaseConditionDTO

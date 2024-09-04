@@ -13,7 +13,7 @@ namespace Ecount.Kjd.Project.CSharp
             return new OrderByConditionDto
             {
                 FieldName = field,
-                SortDirection = sortDirection
+                SortDirection = sortDirection ? "ASC" : "DESC"
             };
         }
     }
