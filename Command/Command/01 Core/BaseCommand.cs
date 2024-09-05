@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Command
 {
@@ -10,7 +6,7 @@ namespace Command
         where TRequest : BaseRequest
         where TResult : BaseResponse, new()
     {
-        public TRequest Request { get; set; }   
+        public TRequest Request { get; set; }
         public TResult Result { get; set; }
         private List<BaseError> _errors = new List<BaseError>();
         public List<BaseError> Errors { get { return _errors; } }

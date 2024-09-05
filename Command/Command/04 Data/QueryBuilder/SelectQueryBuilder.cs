@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Command.ComparisonOperators;
 
 namespace Command
@@ -33,7 +30,7 @@ namespace Command
         }
 
 
-        public SelectQueryBuilder Join(List<JoinConditionDto> conditions)
+        public SelectQueryBuilder Join(List<JoinConditionDTO> conditions)
         {
             foreach (var join in conditions)
             {
@@ -41,7 +38,7 @@ namespace Command
 
                 foreach (var condition in join.OnConditions)
                 {
-                    var rightside = condition.IsFieldName ? (string) condition.Value : AddParameter(condition.Value);
+                    var rightside = condition.IsFieldName ? (string)condition.Value : AddParameter(condition.Value);
                     onClauses.Add($"{condition.LeftField} {ComparisonOperatorConverter.ToSqlOperator(condition.Operator)} {rightside}");
                 }
 

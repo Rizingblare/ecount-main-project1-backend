@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Web;
 using System.Web.UI.WebControls;
 
 namespace Ecount.Kjd.Project.CSharp
@@ -13,8 +11,14 @@ namespace Ecount.Kjd.Project.CSharp
         public static SelectRequestDto ToSelectRequestDTO(ProductRequestDTO.SelectProductRequestDTO request)
         {
             var result = new SelectRequestDto(ProductColumns.TABLE_NAME);
-            result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_CD, request.searchByProdCode));
-            result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_NM, request.searchByProdName));
+            if (request.searchByProdCode != null)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_CD, request.searchByProdCode));
+            }
+            if (request.searchByProdName != null)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_NM, request.searchByProdName));
+            }
 
             if (request.searchByIsused == 1)
             {
@@ -42,9 +46,36 @@ namespace Ecount.Kjd.Project.CSharp
             return result;
         }
 
-        public static ProductResultDTO ToSelectResultDTO(List<Product> res)
+        public static SelectRequestDto ToSelectCountRequestDTO(ProductRequestDTO.SelectProductRequestDTO request)
+        {
+            var result = new SelectRequestDto(ProductColumns.TABLE_NAME);
+            result.Fields = new List<string> { "COUNT(*)" };
+            if (request.searchByProdCode != null)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_CD, request.searchByProdCode));
+            }
+            if (request.searchByProdName != null)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(ProductColumns.PROD_NM, request.searchByProdName));
+            }
+
+            if (request.searchByIsused == 1)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.IS_USED, true));
+            }
+
+            else if (request.searchByIsused == 2)
+            {
+                result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.IS_USED, false));
+            }
+
+            return result;
+        }
+
+        public static ProductResultDTO ToSelectResultDTO(List<Product> res, int totalCount)
         {
             var result = new ProductResultDTO();
+            result.totalCount = totalCount;
             result.data = new List<ProductResultDTO.SelectProductResultDTO>();
             foreach (var r in res)
             {
@@ -54,6 +85,14 @@ namespace Ecount.Kjd.Project.CSharp
                 item.price = r.PRICE;
                 result.data.Add(item);
             }
+            return result;
+        }
+        public static SelectRequestDto ToSelectCountBeforeProductRequestDTO(string comCode, string prodCode)
+        {
+            var result = new SelectRequestDto(ProductColumns.TABLE_NAME);
+            result.Fields = new List<string> { "COUNT(1)" };
+            result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.COM_CODE, comCode));
+            result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.PROD_CD, prodCode));
             return result;
         }
 
@@ -91,6 +130,5 @@ namespace Ecount.Kjd.Project.CSharp
 
             return result;
         }
-
     }
 }

@@ -1,8 +1,0 @@
-POST https://localhost:44391/api/product/insert HTTP/1.1
-Content-Type: application/json; charset=UTF-8
-
-{
-    "prodCode" : "P100001",
-    "prodName" : "진라면",
-    "price" : 1000
-}

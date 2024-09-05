@@ -5,30 +5,7 @@ import * as popupHandler from '../utils/popupHandler.js';
 import { loadFromStorage } from '../utils/localStorageHandler.js';
 
 export function init() {
-    //localStorage.clear();
     utils.allformsPreventSubmit();
-    let data = { Age: '27', Name: '재희' }
-    fetch('/api/product/update/5', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                alert(data.message);
-            }
-            else {
-                alert('Fail');
-            }
-        })
-        .catch(error => {
-            console.error('error:', error);
-            alert('An error occurred');
-        })
     pagingHandler.renderItems(generateProdItemElement, loadFromStorage(config.PROD_CONFIG.SECRET_KEY));
     pagingHandler.registerPaginationEvents(generateProdItemElement, loadFromStorage(config.PROD_CONFIG.SECRET_KEY));
 }

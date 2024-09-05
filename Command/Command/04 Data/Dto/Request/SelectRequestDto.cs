@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Command
 {
@@ -12,7 +8,7 @@ namespace Command
         public string TableName { get; set; }
         public List<BaseConditionDTO> WhereConditions { get; set; } = new List<BaseConditionDTO>();
         public List<OrderByConditionDto> OrderByConditions { get; set; } = new List<OrderByConditionDto>();
-        public List<JoinConditionDto> JoinConditions { get; set; } = new List<JoinConditionDto>();
+        public List<JoinConditionDTO> JoinConditions { get; set; } = new List<JoinConditionDTO>();
         public int? Limit { get; set; }
         public int? Offset { get; set; }
 

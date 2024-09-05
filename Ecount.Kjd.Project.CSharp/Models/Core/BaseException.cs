@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecount.Kjd.Project.CSharp
 {
@@ -16,15 +12,14 @@ namespace Ecount.Kjd.Project.CSharp
         public static readonly BaseException UNEXPECTED_EXCEPTION = new BaseException("예상치 못한 에러가 발생했습니다.", 1004, 500);
 
         // 판매 2000
-        public static readonly BaseException SALE_ALREADY_EXIST = new BaseException("해당 품목으로 생성된 판매 내역이 이미 존재합니다.", 4001, 400);
+        public static readonly BaseException SALE_ALREADY_EXIST = new BaseException("해당 판매 내역이 이미 존재합니다.", 2001, 400);
+        public static readonly BaseException SALE_PRODUCT_ALREADY_EXIST = new BaseException("해당 품목으로 생성된 판매 내역이 이미 존재합니다.", 2002, 400);
+        public static readonly BaseException SALE_NOT_EXIST = new BaseException("존재하지 않는 판매 내역에 대한 요청입니다.", 2003, 400);
 
         // 품목 3000
-        public static readonly BaseException MATCHING_ALREADY_CONFIRMED = new BaseException("전체 확정되어 견적서를 추가할 수 없습니다.", 5000, 400);
-        public static readonly BaseException MATCHING_NOT_FOUND = new BaseException("매칭 내역을 찾을 수 없습니다.", 5001, 404);
-        public static readonly BaseException MATCHING_ALREADY_EXIST = new BaseException("이미 존재하는 매칭입니다.", 5002, 400);
-        public static readonly BaseException MATCHING_NOT_CONFIRMED = new BaseException("견적서 전체 확정이 되지 않았습니다.", 5003, 400);
-        public static readonly BaseException MATCHING_USER_NOT_FOUND = new BaseException("매칭 유저가 존재하지 않기 때문에 견적서를 추가할 수 없습니다.", 5004, 404);
-        
+        public static readonly BaseException PRODUCT_ALREADY_EXIST = new BaseException("해당 품목이 이미 존재합니다.", 3001, 400);
+        public static readonly BaseException PRODUCT_NOT_EXIST = new BaseException("존재하지 않는 품목에 대한 요청입니다.", 3002, 400);
+
         // 필드들
         public override string Message { get; }
         public int Code { get; }

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Ecount.Kjd.Project.CSharp
@@ -19,7 +17,7 @@ namespace Ecount.Kjd.Project.CSharp
                 CookieHandler.GetOrSetComCode(Request, Response);
 
                 var data = saleService.SelectSales(request);
-                var response = ApiUtils.Success(request);
+                var response = ApiUtils.Success(data);
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
             catch (BaseException error)

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Command
+﻿namespace Command
 {
     public class SaleKey : IEntityKey
     {
@@ -15,10 +9,10 @@ namespace Command
     }
     public class Sale : BaseEntity<SaleKey>
     {
-        public string PROD_CD {  get; set; }
-        public string PROD_NM {  get; set; }
-        public int PRICE {  get; set; }
-        public int QTY { get; set; }
+        public string PROD_CD { get; set; }
+        public string PROD_NM { get; set; }
+        public double PRICE { get; set; }
+        public double QTY { get; set; }
         public string REMARK { get; set; }
     }
 }

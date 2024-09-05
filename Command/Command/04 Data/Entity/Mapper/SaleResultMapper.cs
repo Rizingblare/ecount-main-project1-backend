@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Command
 {
@@ -16,8 +12,8 @@ namespace Command
             data.Key.IO_NO = Convert.ToInt32(reader[SaleColumns.IO_NO]);
             data.PROD_CD = reader[SaleColumns.PROD_CD].ToString();
             data.PROD_NM = reader[SaleColumns.PROD_NM].ToString();
-            data.PRICE = Convert.ToInt32(reader[SaleColumns.PRICE]);
-            data.QTY = Convert.ToInt32(reader[SaleColumns.QTY]);
+            data.PRICE = Convert.ToDouble(reader[SaleColumns.PRICE]);
+            data.QTY = Convert.ToDouble(reader[SaleColumns.QTY]);
             data.REMARK = reader[SaleColumns.REMARKS].ToString();
         }
     }

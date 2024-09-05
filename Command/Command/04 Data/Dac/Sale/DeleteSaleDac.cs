@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Command.DeleteSaleDac;
-
-namespace Command
+﻿namespace Command
 {
     public class DeleteSaleDac : BaseCommand<DeleteRequestDto, CommandResultWithBody<int>>
     {

@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Command
 {
@@ -30,7 +27,7 @@ namespace Command
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = sql;
-                    
+
                     foreach (var param in parameters)
                     {
                         cmd.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
@@ -59,9 +56,11 @@ namespace Command
                     }
                     var result = new List<T>();
                     // 서버 메모리 한계로 데이터를 한줄씩 읽기 위한 리더
-                    using (var reader = cmd.ExecuteReader()) {
+                    using (var reader = cmd.ExecuteReader())
+                    {
                         // 한줄씩 읽어옴. 마지막이면 false 반환
-                        while (reader.Read()) {
+                        while (reader.Read())
+                        {
                             var data = new T();
                             //var a = reader("com_code");
                             mapper(reader, data);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Command
 {
@@ -16,7 +12,7 @@ namespace Command
     {
         TResult Result { get; set; }
     }
-    public interface ICommand <TRequest, TResult> : ICommand
+    public interface ICommand<TRequest, TResult> : ICommand
         where TRequest : BaseRequest
         where TResult : BaseResponse
     {

@@ -1,9 +1,5 @@
 ﻿using Command;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Web;
 
 namespace Ecount.Kjd.Project.CSharp
 {
@@ -13,18 +9,35 @@ namespace Ecount.Kjd.Project.CSharp
         {
             var pipeLine = new PipeLine();
             var result = new ProductResultDTO();
+
+            pipeLine.Register<SelectProductCountDac, CommandResultWithBody<int>>(new SelectProductCountDac())
+                .Mapping((cmd) =>
+                {
+                    cmd.Request = ProductDTOConverter.ToSelectCountRequestDTO(request);
+                })
+                .Executed((res) => pipeLine.Contexts.Add("totalCount", res.Body));
+
             pipeLine.Register<SelectProductDac, CommandResultWithBody<List<Product>>>(new SelectProductDac())
                 .Mapping((cmd) =>
                 {
                     cmd.Request = ProductDTOConverter.ToSelectRequestDTO(request);
                 })
-                .Executed((res) => result = ProductDTOConverter.ToSelectResultDTO(res.Body));
+                .Executed((res) => result = ProductDTOConverter.ToSelectResultDTO(res.Body, (int)pipeLine.Contexts["totalCount"]));
             pipeLine.Execute();
             return result;
         }
         public void InsertProducts(string comCode, ProductRequestDTO.InsertProductRequestDTO request)
         {
             var pipeLine = new PipeLine();
+            pipeLine.Register<SelectCountBeforeProductDac, CommandResultWithBody<int>>(new SelectCountBeforeProductDac())
+                .Mapping((cmd) =>
+                {
+                    cmd.Request = ProductDTOConverter.ToSelectCountBeforeProductRequestDTO(comCode, request.prodCode);
+                })
+                .Executed((res) =>
+                {
+                    if (res.Body > 0) throw BaseException.PRODUCT_ALREADY_EXIST;
+                });
             pipeLine.Register<InsertProductDac, CommandResultWithBody<int>>(new InsertProductDac())
                 .Mapping((cmd) =>
                 {
@@ -36,6 +49,16 @@ namespace Ecount.Kjd.Project.CSharp
         public void UpdateProducts(string comCode, ProductRequestDTO.UpdateProductRequestDTO request)
         {
             var pipeLine = new PipeLine();
+            pipeLine.Register<SelectCountBeforeProductDac, CommandResultWithBody<int>>(new SelectCountBeforeProductDac())
+                .Mapping((cmd) =>
+                {
+                    cmd.Request = ProductDTOConverter.ToSelectCountBeforeProductRequestDTO(comCode, request.prodCode);
+                })
+                .Executed((res) =>
+                {
+                    if (res.Body == 0) throw BaseException.PRODUCT_NOT_EXIST;
+                });
+
             pipeLine.Register<UpdateProductDac, CommandResultWithBody<int>>(new UpdateProductDac())
                 .Mapping((cmd) =>
                 {

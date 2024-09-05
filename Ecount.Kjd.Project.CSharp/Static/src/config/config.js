@@ -11,6 +11,17 @@ export const URL = {
     SALE_EDIT: 'saleEdit.html'
 };
 
+export const API = {
+    SELECT_PRODUCT_URL: '/api/product/select',
+    INSERT_PRODUCT_URL: '/api/product/insert',
+    UPDATE_PRODUCT_URL: '/api/product/update',
+    DELETE_PRODUCT_URL: '/api/product/delete',
+    SELECT_SALE_URL: '/api/sale/select',
+    INSERT_SALE_URL: '/api/sale/insert',
+    UPDATE_SALE_URL: '/api/sale/update',
+    DELETE_SALE_URL: '/api/sale/delete'
+};
+
 export const PROD_CONFIG = {
     SECRET_KEY : 'prod',
     PRIMARY_KEY : 'id',

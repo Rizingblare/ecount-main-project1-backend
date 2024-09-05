@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Versioning;
 using System.Text;
-using System.Threading.Tasks;
 using static Command.ComparisonOperators;
 
 namespace Command
@@ -35,6 +32,11 @@ namespace Command
                 {
                     whereConditions.Add($"({condition.LeftField} LIKE '%{condition.Value}%')");
                 }
+
+                else if (condition is BetweenConditionDTO)
+                {
+                    whereConditions.Add($"(BETWEEN {AddParameter(condition.LeftField)} AND {AddParameter(condition.Value)})");
+                }
                 else
                 {
                     // 단일 조건 처리
@@ -50,7 +52,7 @@ namespace Command
         private string BuildComplexCondition(List<BaseConditionDTO> subConditions, string logicalOperator)
         {
             List<string> conditionClauses = new List<string>();
-            foreach(var subCondition in subConditions)
+            foreach (var subCondition in subConditions)
             {
                 if (subCondition.Value is List<BaseConditionDTO> outerCondition)
                 {

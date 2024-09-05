@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Command
+﻿namespace Command
 {
     public class BaseEntity<TKey> : IEntity<TKey>
         where TKey : IEntityKey, new()

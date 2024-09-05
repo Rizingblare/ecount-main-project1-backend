@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Command
 {
@@ -33,7 +29,7 @@ namespace Command
             query.Append(string.Join(", ", setClauses)).Append(" ");
 
             BuildWhereClause();
-            
+
             return (query.ToString().Trim(), parameters);
         }
     }

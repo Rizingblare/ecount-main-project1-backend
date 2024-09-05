@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Command
 {
@@ -14,7 +10,7 @@ namespace Command
     public class Product : BaseEntity<ProductKey>
     {
         public string PROD_NM { get; set; }
-        public int PRICE { get; set; }
+        public double PRICE { get; set; }
         public DateTime WRITE_DT { get; set; }
         public bool IS_USED { get; set; }
     }

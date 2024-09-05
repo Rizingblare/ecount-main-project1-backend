@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS flow.sale_kjd
     io_no integer,
     prod_cd character varying(50),
     prod_nm character varying(100),
-    price integer,
-    qty integer,
+    price double,
+    qty double,
     remarks character varying(100),
     CONSTRAINT sale_kjd_pkey PRIMARY KEY (com_code, io_date, io_no)
 );

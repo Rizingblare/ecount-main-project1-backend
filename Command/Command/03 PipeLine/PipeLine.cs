@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Command
 {
@@ -36,7 +32,7 @@ namespace Command
         public void Execute()
         {
             int totalCount = _items.Count();
-            while(_items.Count > 0)
+            while (_items.Count > 0)
             {
                 var item = _items.Dequeue();
                 try

@@ -1,8 +1,5 @@
 ﻿using Command;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Ecount.Kjd.Project.CSharp.Models.Sale
 {
@@ -14,7 +11,7 @@ namespace Ecount.Kjd.Project.CSharp.Models.Sale
             result.Fields = new List<string> { SaleNumColumns.IO_NO };
             result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(SaleNumColumns.COM_CODE, comCode));
             result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(SaleNumColumns.IO_DATE, data_dt));
-            
+
             return result;
         }
 
