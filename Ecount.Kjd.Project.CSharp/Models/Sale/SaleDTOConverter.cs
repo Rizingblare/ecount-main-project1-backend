@@ -32,7 +32,7 @@ namespace Ecount.Kjd.Project.CSharp
             }
 
             result.Limit = request.pageSize;
-            result.Offset = request.pageSize * request.pageNum;
+            result.Offset = request.pageSize * (request.pageNum - 1);
 
             return result;
         }
