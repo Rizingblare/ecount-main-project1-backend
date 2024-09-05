@@ -30,14 +30,14 @@ namespace Ecount.Kjd.Project.CSharp
                 result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.IS_USED, false));
             }
 
-            if (request.orderByProdCode)
-            {
-                result.OrderByConditions.Add(OrderByDTOConverter.ToOrderByConditionDTO(ProductColumns.PROD_CD, request.orderByProdCodeASC));
-            }
-
             if (request.orderByProdName)
             {
                 result.OrderByConditions.Add(OrderByDTOConverter.ToOrderByConditionDTO(ProductColumns.PROD_NM, request.orderByProdNameASC));
+            }
+
+            if (request.orderByProdCode)
+            {
+                result.OrderByConditions.Add(OrderByDTOConverter.ToOrderByConditionDTO(ProductColumns.PROD_CD, request.orderByProdCodeASC));
             }
 
             result.Limit = request.pageSize;

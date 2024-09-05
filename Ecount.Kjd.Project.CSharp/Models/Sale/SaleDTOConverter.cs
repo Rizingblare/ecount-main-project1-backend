@@ -16,7 +16,9 @@ namespace Ecount.Kjd.Project.CSharp
 
             if (request.searchByProdCode != null)
             {
-                result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(SaleColumns.PROD_CD, request.searchByProdCode));
+                var searchByProdCodeArr = request.searchByProdCode.Split('|');
+                var prodCodes = searchByProdCodeArr.Select(item => item.Trim()).ToList();
+                result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.PROD_CD, prodCodes));
             }
 
             if (request.orderByDate)
@@ -46,7 +48,9 @@ namespace Ecount.Kjd.Project.CSharp
 
             if (request.searchByProdCode != null)
             {
-                result.WhereConditions.Add(ConditionDTOConverter.ToLikeConditionDTO(SaleColumns.PROD_CD, request.searchByProdCode));
+                var searchByProdCodeArr = request.searchByProdCode.Split('|');
+                var prodCodes = searchByProdCodeArr.Select(item => item.Trim()).ToList();
+                result.WhereConditions.Add(ConditionDTOConverter.ToConditionDTO(ProductColumns.PROD_CD, prodCodes));
             }
             return result;
         }
