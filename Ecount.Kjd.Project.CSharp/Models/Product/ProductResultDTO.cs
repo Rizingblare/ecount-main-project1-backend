@@ -12,6 +12,7 @@ namespace Ecount.Kjd.Project.CSharp
             public string prodCode { get; set; }
             public string prodName { get; set; }
             public double price { get; set; }
+            public string isUsed { get; set; }
         }
     }
 }

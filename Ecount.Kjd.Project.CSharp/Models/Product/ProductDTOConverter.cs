@@ -83,6 +83,7 @@ namespace Ecount.Kjd.Project.CSharp
                 item.prodCode = r.Key.PROD_CD;
                 item.prodName = r.PROD_NM;
                 item.price = r.PRICE;
+                item.isUsed = r.IS_USED ? "Yes" : "No";
                 result.data.Add(item);
             }
             return result;
