@@ -1,24 +1,24 @@
-class ProductRequestDTO {
+class SelectProductRequestDTO {
     constructor(
-      searchByProdCode,
-      searchByProdName,
-      searchByIsused,
-      orderByProdCode,
-      orderByProdCodeASC,
-      orderByProdName,
-      orderByProdNameASC,
-      pageNum,
-      pageSize
+        searchByProdCode,
+        searchByProdName,
+        searchByIsused,
+        orderByProdCode,
+        orderByProdCodeASC,
+        orderByProdName,
+        orderByProdNameASC,
+        pageNum,
+        pageSize
     ) {
-      this.searchByProdCode = searchByProdCode;
-      this.searchByProdName = searchByProdName;
-      this.searchByIsused = searchByIsused;
-      this.orderByProdCode = orderByProdCode;
-      this.orderByProdCodeASC = orderByProdCodeASC;
-      this.orderByProdName = orderByProdName;
-      this.orderByProdNameASC = orderByProdNameASC;
-      this.pageNum = pageNum;
-      this.pageSize = pageSize;
+        this.searchByProdCode = searchByProdCode;
+        this.searchByProdName = searchByProdName;
+        this.searchByIsused = searchByIsused;
+        this.orderByProdCode = orderByProdCode;
+        this.orderByProdCodeASC = orderByProdCodeASC;
+        this.orderByProdName = orderByProdName;
+        this.orderByProdNameASC = orderByProdNameASC;
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
     }
   
     toQueryString() {
@@ -39,4 +39,4 @@ class ProductRequestDTO {
     }
   }
   
-  
+  export default SelectProductRequestDTO;
